@@ -30,8 +30,13 @@ const Login = () => {
       window.alert("Invalid Credentials");
     } else {
       dispatch({ type: "USER", payload: true });
+
+      const fdata = await data;
+      console.log(fdata);
       window.alert("Login Successfull");
-      history.push("/dashboard");
+      fdata.type === "admin"
+        ? history.push("/contact")
+        : history.push("/dashboard");
     }
   };
 

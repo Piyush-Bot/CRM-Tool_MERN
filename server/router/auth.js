@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authenticate = require("../middleware/authenticate");
+const sendMail = require("../services/sendMail.service");
 
 require("../db/conn");
 const User = require("../model/userSchema");
@@ -11,11 +12,24 @@ router.get("/", (req, res) => {
   res.send(`hello world from server from router`);
 });
 
+//emailverification
+router.get("/verifyEmail/:email", async (req, res) => {
+  try {
+    let email = req.params.email;
+    console.log(email);
+    await User.findOneAndUpdate({ email: email }, { emailVerified: true });
+    // res.sendFile(path.join(__dirname, "/verifyEmail.html"));
+    res.send(`mail`);
+  } catch (err) {
+    throw err;
+  }
+});
+
 //using async/ await
 router.post("/register", async (req, res) => {
-  const { name, email, phone, work, password, cpassword } = req.body;
+  const { name, email, phone, work, password, cpassword, type } = req.body;
 
-  if (!name || !email || !phone || !work || !password || !cpassword) {
+  if (!name || !email || !phone || !work || !password || !cpassword || !type) {
     return res.status(422).json({ error: "plz fill rest of the fields" });
   }
 
@@ -27,9 +41,20 @@ router.post("/register", async (req, res) => {
     } else if (password != cpassword) {
       return res.status(422).json({ error: "password didn't match" });
     } else {
-      const user = new User({ name, email, phone, work, password, cpassword });
+      const user = new User({
+        name,
+        email,
+        phone,
+        work,
+        password,
+        cpassword,
+        type,
+      });
       //hash call here
       await user.save();
+      //mail fun.
+      sendMail(email, "verification");
+
       res.status(201).json({ message: "registered successful" });
     }
   } catch (err) {
@@ -48,31 +73,32 @@ router.post("/signin", async (req, res) => {
     }
 
     const userLogin = await User.findOne({ email: email });
-
-    //console.log(userLogin);
-
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
-
       if (!isMatch) {
         res.status(400).json({ error: "Invalid Credientials " });
       } else {
         // need to genereate the token and stored cookie after the password match
-        token = await userLogin.generateAuthToken();
-        console.log(token);
+        if (userLogin.emailVerified) {
+          token = await userLogin.generateAuthToken();
+          res.cookie("jwtoken", token, {
+            expires: new Date(Date.now() + 25892000000),
+            httpOnly: true,
+          });
 
-        res.cookie("jwtoken", token, {
-          expires: new Date(Date.now() + 25892000000),
-          httpOnly: true,
-        });
-
-        res.json({ message: "user Signin Successfully" });
+          res.json({
+            message: "user Signin Successfully",
+            type: userLogin.type,
+          });
+        } else {
+          throw Error("email unverified");
+        }
       }
     } else {
       res.status(400).json({ error: "Invalid Credientials " });
     }
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 });
 
@@ -88,8 +114,8 @@ router.get("/getdata", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
 
-router.get("/getdatal", authenticate, async (req, res) => {
-  //console.log(`Hello my getdata`);
+router.get("/getdatal", async (req, res) => {
+  console.log(`Hello my getdatalllllllll`);
   const users = await User.find(
     {},
     { password: 0, cpassword: 0, tokens: 0, _id: 0 }

@@ -2,7 +2,18 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import signpic from "../images/signup.svg";
 
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+
 const Signup = () => {
+  const [userType, setuserType] = React.useState("user");
+
+  // const handleInputs = (event) => {
+  //   setuserType(event.target.value);
+  //};
   const history = useHistory();
   const [user, setUser] = useState({
     name: "",
@@ -11,6 +22,7 @@ const Signup = () => {
     work: "",
     password: "",
     cpassword: "",
+    type: "user",
   });
 
   let name, value;
@@ -19,15 +31,18 @@ const Signup = () => {
     console.log(e);
     name = e.target.name;
     value = e.target.value;
-
+    console.log(name, value);
+    if (e.target.name === "type") {
+      setuserType(e.target.value);
+    }
     setUser({ ...user, [name]: value });
   };
 
   const PostData = async (e) => {
     e.preventDefault();
 
-    const { name, email, phone, work, password, cpassword } = user;
-
+    const { name, email, phone, work, password, cpassword, type } = user;
+    console.log(user);
     const res = await fetch("/register", {
       method: "POST",
       headers: {
@@ -40,6 +55,7 @@ const Signup = () => {
         work,
         password,
         cpassword,
+        type,
       }),
     });
 
@@ -79,7 +95,6 @@ const Signup = () => {
                     placeholder="Your Name"
                   />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="email">
                     <i className="zmdi zmdi-email material-icons-name"></i>
@@ -94,7 +109,6 @@ const Signup = () => {
                     placeholder="Your Email"
                   />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="phone">
                     <i className="zmdi zmdi-phone-in-talk material-icons-name"></i>
@@ -109,7 +123,6 @@ const Signup = () => {
                     placeholder="Your Phone"
                   />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="work">
                     <i className="zmdi zmdi-slideshow material-icons-name"></i>
@@ -124,7 +137,6 @@ const Signup = () => {
                     placeholder="Your Profession"
                   />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="password">
                     <i className="zmdi zmdi-lock material-icons-name"></i>
@@ -139,7 +151,6 @@ const Signup = () => {
                     placeholder="Your Password"
                   />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="cpassword">
                     <i className="zmdi zmdi-lock material-icons-name"></i>
@@ -154,6 +165,27 @@ const Signup = () => {
                     placeholder="Confirm Your Password"
                   />
                 </div>
+
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Type</FormLabel>
+                  <RadioGroup
+                    aria-label="type"
+                    name="type"
+                    value={userType}
+                    onChange={handleInputs}
+                  >
+                    <FormControlLabel
+                      value="admin"
+                      control={<Radio />}
+                      label="Admin"
+                    />
+                    <FormControlLabel
+                      value="user"
+                      control={<Radio />}
+                      label="User"
+                    />
+                  </RadioGroup>
+                </FormControl>
 
                 <div className="form-group form-button">
                   <input

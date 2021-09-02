@@ -19,50 +19,49 @@ export const UserContext = createContext();
 
 const Routing = () => {
   return (
-    <>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
 
-        <Route path="/list">
-          <List />
-        </Route>
+      <Route path="/list">
+        <List />
+      </Route>
 
-        <Route path="/about">
-          <About />
-        </Route>
+      <Route path="/about">
+        <About />
+      </Route>
 
-        <Route path="/contact">
-          <Contact />
-        </Route>
+      <Route path="/contact">
+        <Contact />
+      </Route>
 
-        <Route path="/login">
-          <Login />
-        </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
 
-        <Route path="/signup">
-          <Signup />
-        </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
 
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
+      <Route path="/dashboard">
+        <Dashboard />
+      </Route>
 
-        <Route path="/logout">
-          <Logout />
-        </Route>
+      <Route path="/logout">
+        <Logout />
+      </Route>
 
-        <Route>
-          <ErrorPage />
-        </Route>
-      </Switch>
-    </>
+      <Route>
+        <ErrorPage />
+      </Route>
+    </Switch>
   );
 };
 
 const App = () => {
   //* we use useReducer
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (

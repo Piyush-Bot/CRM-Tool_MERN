@@ -397,7 +397,7 @@ input[type="checkbox"]:not(old):checked + label > span:before {
 }
 
 label {
-  position: absolute;
+  position: relative;
   left: 0px;
   top: 50%;
   transform: translateY(-50%);
@@ -407,10 +407,10 @@ label {
   -ms-transform: translateY(-50%);
   color: #222;
 }
-/* label .material-icons-name {
+label .material-icons-name {
   position: absolute;
   top: 25px;
-} */
+}
 
 .label-has-error {
   top: 22%;
