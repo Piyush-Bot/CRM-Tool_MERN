@@ -748,8 +748,8 @@ label.valid:after {
 }
 
 .home-page {
-  /* width: 100vw; */
-  height: 90vh;
+  width: 40vw;
+  height: 30vh;
   background-image: linear-gradient(90deg, #ecf0ff 50%, #fff 50%);
   display: flex;
   justify-content: left;
@@ -823,9 +823,6 @@ label.valid:after {
 
 .contact_form {
   padding-top: 85px;
-}
-
-.contact_form_container {
 }
 
 .contact_form_title {

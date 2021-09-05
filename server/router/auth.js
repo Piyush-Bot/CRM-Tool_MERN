@@ -115,7 +115,7 @@ router.get("/getdata", authenticate, (req, res) => {
 });
 
 router.get("/getdatal", async (req, res) => {
-  console.log(`Hello my getdatalllllllll`);
+  // console.log(`Hello my getdatalllllllll`);
   const users = await User.find(
     {},
     { password: 0, cpassword: 0, tokens: 0, _id: 0 }
