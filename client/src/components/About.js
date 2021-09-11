@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import userpic from "../images/uspic .jpg";
-import aboutpic from "../images/aboutpic.png";
+import userpic from "./images/uspic .jpg";
+import aboutpic from "./images/aboutpic.png";
 import { useHistory } from "react-router-dom";
 
 const About = () => {

@@ -1,0 +1,114 @@
+[
+  {
+    "Categories": "Celeb",
+    "Genre": "Travel",
+    "Name": "Andrew",
+    "Age": 26,
+    "City": "Mumbai",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "A",
+    "Genre": "Style/Fashion",
+    "Name": "Denise",
+    "Age": 28,
+    "City": "Delhi",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "Celeb",
+    "Genre": "Food",
+    "Name": "Irma",
+    "Age": 27,
+    "City": "Shimla",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "A",
+    "Genre": "Travel",
+    "Name": "Uma",
+    "Age": 20,
+    "City": "Shimla",
+    "Gender": "Female"
+  },
+  {
+    "Categories": "B",
+    "Genre": "Actor",
+    "Name": "Amaya",
+    "Age": 24,
+    "City": "Bangalore",
+    "Gender": "Female"
+  },
+  {
+    "Categories": "Celeb",
+    "Genre": "Style/Fashion",
+    "Name": "Whoopi",
+    "Age": 23,
+    "City": "Mumbai",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "B",
+    "Genre": "Actor",
+    "Name": "Tallulah",
+    "Age": 24,
+    "City": "Delhi",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "C",
+    "Genre": "Food",
+    "Name": "Bevis",
+    "Age": 20,
+    "City": "Mumbai",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "C",
+    "Genre": "Travel",
+    "Name": "Addison",
+    "Age": 27,
+    "City": "Bangalore",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "B",
+    "Genre": "Style/Fashion",
+    "Name": "Hayes",
+    "Age": 20,
+    "City": "Mumbai",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "Nano",
+    "Genre": "Actor",
+    "Name": "Brent",
+    "Age": 25,
+    "City": "Chennai",
+    "Gender": "Male"
+  },
+  {
+    "Categories": "Nano",
+    "Genre": "Food",
+    "Name": "Otto",
+    "Age": 28,
+    "City": "Delhi",
+    "Gender": "Female"
+  },
+  {
+    "Categories": "Verified",
+    "Genre": "Style/Fashion",
+    "Name": "Dora",
+    "Age": 25,
+    "City": "Chennai",
+    "Gender": "Female"
+  },
+  {
+    "Categories": "Verified",
+    "Genre": "Style/Fashion",
+    "Name": "Solomon",
+    "Age": 22,
+    "City": "Shimla",
+    "Gender": "Male"
+  }
+]

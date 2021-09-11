@@ -2,7 +2,8 @@ import React, { useReducer, createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import Navbar from "./components/Navbar";
+//import "./home/Home.css"; giving error
+import Navbar1 from "./components/home/Navbar1";
 import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -11,8 +12,17 @@ import Signup from "./components/Signup";
 import ErrorPage from "./components/Errorpage";
 import Dashboard from "./components/Dashboard";
 import Logout from "./components/Logout";
-import { initialState, reducer } from "./reducer/UseReducer";
+import { initialState, reducer } from "./components/reducer/UseReducer";
 import List from "./components/Influencer/List";
+import Search from "./components/search/Search";
+
+/* 
+import Navbar from "./components/Navbar";
+import Home from './components/pages/Home';
+
+import Contact from './components/pages/Contact';
+import Influencers from './components/pages/Influencers';
+import SignUp from './components/pages/SignUp'; */
 
 // we create a contextAPI
 export const UserContext = createContext();
@@ -27,6 +37,8 @@ const Routing = () => {
       <Route path="/list">
         <List />
       </Route>
+
+      {/* <Route path="/list" component={List} /> */}
 
       <Route path="/about">
         <About />
@@ -52,9 +64,18 @@ const Routing = () => {
         <Logout />
       </Route>
 
+      <Route path="/search">
+        <Search />
+      </Route>
       <Route>
         <ErrorPage />
       </Route>
+
+      {/* 
+<Route path='/' exact component={Home} />
+          <Route path='/contact' component={Contact} />
+          <Route path='/influencers' component={Influencers} />
+          <Route path='/sign-up' component={SignUp} /> */}
     </Switch>
   );
 };
@@ -66,7 +87,7 @@ const App = () => {
 
   return (
     <UserContext.Provider value={{ state, dispatch }}>
-      <Navbar />
+      <Navbar1 />
       <Routing />
     </UserContext.Provider>
   );

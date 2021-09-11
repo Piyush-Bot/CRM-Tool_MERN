@@ -1,6 +1,7 @@
 .featured {
-  width: 100%;
+  max-width: 400px; /* or whatever width you want. */
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 

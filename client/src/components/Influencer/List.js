@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+//import "../../App.css"; no need to add here its already workin from APP.js
 
 const InfluencerList = () => {
   const [userData, setUserData] = useState([]);
@@ -93,26 +94,62 @@ const InfluencerList = () => {
 
   return (
     <>
-      <div className="row">
-        <div className="col-md-2">SideBar</div>
+      {" "}
+      <div className="list">
+        <div className="row">
+          <div className="col-md-2">SideBar</div>
 
-        <div className="col-md-10">
-          <div className="row">
-            <div className="col-md-9">
-              Influencer List
-              <h1>InfluencerList</h1>
-              <div style={{ height: 400, width: "100%" }}>
-                <DataGrid
-                  rows={userData}
-                  columns={columns}
-                  pageSize={5}
-                  checkboxSelection
-                  disableSelectionOnClick
-                />
+          <div className="col-md-10">
+            <div className="row">
+              <div className="col-md-9">
+                Influencer List
+                <h1>InfluencerList</h1>
+                <div style={{ height: 400, width: "100%" }}>
+                  <DataGrid
+                    rows={userData}
+                    columns={columns}
+                    pageSize={5}
+                    checkboxSelection
+                    disableSelectionOnClick
+                  />
+                </div>
+              </div>
+              <div className="col-md-3">
+                <h2>INF_ right</h2>
+                <p>
+                  Material UI is a component library for React teeming with
+                  powerful components that you should be using in your projects.
+                  If you're just looking to create a good looking app, Material
+                  UI can provide you with solid pre-styled components that will
+                  get the job done.
+                </p>
               </div>
             </div>
-            <div className="col-md-3">
-              <h2>INF_ right</h2>
+            <div className="row">
+              <div className="col-md-4">
+                <h2>Recent</h2>
+                <p>
+                  Material UI is a component library for React teeming with
+                  powerful components that you should be using in your projects.
+                  If you're just looking to create a good looking app, Material
+                  UI can provide you with solid pre-styled components that will
+                  get the job done.
+                </p>
+              </div>
+              <div className="col-md-8">
+                <h2>Campaign</h2>
+                <p>
+                  Material UI is a component library for React teeming with
+                  powerful components that you should be using in your projects.
+                  If you're just looking to create a good looking app, Material
+                  UI can provide you with solid pre-styled components that will
+                  get the job done.
+                </p>
+                <br></br>
+              </div>
+            </div>
+            <div className="row">
+              <h5>end-of-list</h5>
               <p>
                 Material UI is a component library for React teeming with
                 powerful components that you should be using in your projects.
@@ -121,38 +158,6 @@ const InfluencerList = () => {
                 the job done.
               </p>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-md-4">
-              <h2>Recent</h2>
-              <p>
-                Material UI is a component library for React teeming with
-                powerful components that you should be using in your projects.
-                If you're just looking to create a good looking app, Material UI
-                can provide you with solid pre-styled components that will get
-                the job done.
-              </p>
-            </div>
-            <div className="col-md-8">
-              <h2>Campaign</h2>
-              <p>
-                Material UI is a component library for React teeming with
-                powerful components that you should be using in your projects.
-                If you're just looking to create a good looking app, Material UI
-                can provide you with solid pre-styled components that will get
-                the job done.
-              </p>
-              <br></br>
-            </div>
-          </div>
-          <div className="row">
-            <h5>end-of-list</h5>
-            <p>
-              Material UI is a component library for React teeming with powerful
-              components that you should be using in your projects. If you're
-              just looking to create a good looking app, Material UI can provide
-              you with solid pre-styled components that will get the job done.
-            </p>
           </div>
         </div>
       </div>

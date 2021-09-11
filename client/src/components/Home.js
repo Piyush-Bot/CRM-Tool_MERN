@@ -1,13 +1,18 @@
 import React from "react";
+//import "./App.css"; giving error
+
+import HeroSection from "./home/HeroSection";
+import Cards from "./home/Cards";
+import Footer from "./home/Footer";
+import { Review } from "./home/review/Review";
+
 const Home = () => {
   return (
     <>
-      <div className="home-page">
-        <div className="home-div">
-          <p className="pt-5">WELCOME</p>
-          <h3>Scrol Labs Demo Project</h3>
-        </div>
-      </div>
+      <HeroSection />
+      <Cards />
+      <Review />
+      <Footer />
     </>
   );
 };

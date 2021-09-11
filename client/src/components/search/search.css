@@ -1,0 +1,18 @@
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+h1,
+p {
+  font-family: Lato;
+  margin: 10px;
+  font-size: 18px;
+}
+.Search select {
+  margin-top: 20px;
+  width: 20px;
+  height: 40px;
+  font-size: 20px;
+}
