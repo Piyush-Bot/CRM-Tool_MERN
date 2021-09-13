@@ -51,9 +51,9 @@ const columns = [
     align: "right",
   },
 ];
+//const [searchTerm, setSearchTerm] = useState({});
 
 export default class Search extends Component {
-  const [searchTerm, setSearchTerm] = useState({});
   constructor() {
     super();
     this.state = {
@@ -62,6 +62,7 @@ export default class Search extends Component {
       filteredData: data,
       page: 0,
       rowsPerPage: 10,
+      // searchTerm: [],
     };
   }
 
@@ -82,13 +83,6 @@ export default class Search extends Component {
     this.setState({
       filterOption: e.target.value,
     });
-  }
-
-  abc(e) {
-    this.setState({
-      selectedOption: [...this.state.selectedOption, ...e.target.value],
-    });
-    console.log(e.target.value);
   }
 
   renderTableData(data) {
@@ -210,7 +204,7 @@ export default class Search extends Component {
         <div className="row">
           <div className="row">
             <div className="col-md-2">
-              <div className="Search">
+              {/* <div className="Search">
                 <input
                   type="text"
                   placeholder="Search...."
@@ -235,7 +229,7 @@ export default class Search extends Component {
                       </div>
                     );
                   })}
-              </div>
+              </div> */}
             </div>
 
             <div className="col-md-2">
