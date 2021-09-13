@@ -141,9 +141,7 @@ export default class Search extends Component {
 
   handleSelectedValue = (value) => {
     if (!value.includes('')) {
-      const duplicates = value.map((el) => Object.values(el)[0]).reduce(function(acc, el, i, arr) {
-        if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(el); return acc;
-      }, []);
+      const duplicates = value.map((el) => Object.values(el)[0]).filter((e, i, a) => a.indexOf(e) !== i);
       value = value.filter((el) => !duplicates.includes(Object.values(el)[0]));
       this.setState((prev) => {
         return {
@@ -170,7 +168,6 @@ export default class Search extends Component {
         e.target.value.toLowerCase()
         ) !== -1;
     });
-    console.log('sdfsdfrf4343', updateList);
     this.setState((prev) => {
       return {
         ...prev,
