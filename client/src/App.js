@@ -15,14 +15,7 @@ import Logout from "./components/Logout";
 import { initialState, reducer } from "./components/reducer/UseReducer";
 import List from "./components/Influencer/List";
 import Search from "./components/search/Search";
-
-/* 
-import Navbar from "./components/Navbar";
-import Home from './components/pages/Home';
-
-import Contact from './components/pages/Contact';
-import Influencers from './components/pages/Influencers';
-import SignUp from './components/pages/SignUp'; */
+import Search1 from "./components/search/Search1";
 
 // we create a contextAPI
 export const UserContext = createContext();
@@ -67,6 +60,11 @@ const Routing = () => {
       <Route path="/search">
         <Search />
       </Route>
+
+      <Route path="/search1">
+        <Search1 />
+      </Route>
+
       <Route>
         <ErrorPage />
       </Route>
