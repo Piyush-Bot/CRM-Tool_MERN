@@ -99,8 +99,13 @@ export default class Search extends Component {
   }
   // display values in input when selected
   getdisplayvalue(data) {
-    const modifiyedVal = data.map((el) => Object.entries(el)[0][1]);
-    return modifiyedVal.join(" , ");
+    if (!data.includes('')) {
+      const modifiyedVal = data.map((el) => Object.entries(el)[0][1]);
+      return modifiyedVal.join(" , ");
+    }
+    if (data.includes('')) {
+      return '';
+    }
   }
 
   renderFilterOptions(filterOption) {
@@ -119,22 +124,13 @@ export default class Search extends Component {
   }
 
   filterOptionSelected(val) {
-    console.log("val", val);
-
     const obj = {};
     val.forEach((el) => {
       Object.assign(obj, el);
     });
-    // return obj;
     const temp = data.filter(
       (ele) => Object.keys(obj).every((objEl) => ele[objEl] === obj[objEl])
-      // ele.Categories === obj.Categories &&
-      // ele.Genre === obj.Genre &&
-      // ele.Gender === obj.Gender
-      // // ele.City === obj.City
     );
-    console.log("data---------", data);
-    console.log("1111", temp, obj);
     this.setState((prev) => {
       return {
         ...prev,
@@ -144,36 +140,51 @@ export default class Search extends Component {
   }
 
   handleSelectedValue = (value) => {
-    value = value
-      .slice()
-      .reverse()
-      .filter(
-        (v, i, a) =>
-          a.findIndex(
-            (t) =>
-              t.Categories === v.Categories &&
-              t.Genre === v.Genre &&
-              t.Gender === v.Gender &&
-              t.City === v.City
-          ) === i
-      )
-      .reverse();
-    console.log("valeeeeeeee", value);
+    if (!value.includes('')) {
+      const duplicates = value.map((el) => Object.values(el)[0]).reduce(function(acc, el, i, arr) {
+        if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(el); return acc;
+      }, []);
+      value = value.filter((el) => !duplicates.includes(Object.values(el)[0]));
+      this.setState((prev) => {
+        return {
+          ...prev,
+          selectedOption: [...value],
+        };
+      });
+      this.filterOptionSelected(value);
+    }
+    if (value.includes('')) {
+      this.setState((prev) => {
+        return {
+          ...prev,
+          filteredData: data,
+          selectedOption: []
+        };
+      });
+    }
+  };
+  filterList(e){
+    let updateList = data;
+    updateList = updateList.filter(item => {
+      return item.Name.toLowerCase().search(
+        e.target.value.toLowerCase()
+        ) !== -1;
+    });
+    console.log('sdfsdfrf4343', updateList);
     this.setState((prev) => {
       return {
         ...prev,
-        selectedOption: [...value],
+        filteredData: updateList,
+        selectedOption: []
       };
     });
-    this.filterOptionSelected(value);
-  };
-
+  }
   render() {
     const makeItems = () => {
       let itemList = [];
       headers.forEach((el, i) => {
         let checkUnique = [];
-        itemList.push(<ListItemText primary={el} />);
+        itemList.push(<ListItemText key={i} primary={el} />);
         data.forEach((elm, index) => {
           checkUnique.push(elm[el]);
         });
@@ -190,7 +201,7 @@ export default class Search extends Component {
                   (val) => val[el] === itemValue[el]
                 )}
               />
-              <ListItemText primary={unique} />
+              <ListItemText key={indexU} primary={unique} />
             </MenuItem>
           );
         });
@@ -204,32 +215,9 @@ export default class Search extends Component {
         <div className="row">
           <div className="row">
             <div className="col-md-2">
-              {/* <div className="Search">
-                <input
-                  type="text"
-                  placeholder="Search...."
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                  }}
-                />
-                {data
-                  .filter((val) => {
-                    if (searchTerm == "") {
-                      return val;
-                    } else if (
-                      val.Name.toLowerCase().includes(searchTerm.toLowerCase())
-                    ) {
-                      return val;
-                    }
-                  })
-                  .map((val, key) => {
-                    return (
-                      <div className="user">
-                        <p>{val.Name}</p>
-                      </div>
-                    );
-                  })}
-              </div> */}
+              <div className="Search">
+                <input type="text" placeholder="enter search text" onChange={(e) => this.filterList(e)} />
+              </div>
             </div>
 
             <div className="col-md-2">
@@ -392,7 +380,7 @@ const headers = [
   { label: "Website", key: "website" }
 ];
  
-class AsyncCSV extends Component {
+className AsyncCSV extends Component {
   constructor(props) {
     super(props);
     this.state = {
