@@ -15,7 +15,8 @@ import Logout from "./components/Logout";
 import { initialState, reducer } from "./components/reducer/UseReducer";
 import List from "./components/Influencer/List";
 import Search from "./components/search/Search";
-import Search1 from "./components/search/Search1";
+import Footer from "./components/home/Footer";
+// import Search1 from "./components/search/Search1";
 
 // we create a contextAPI
 export const UserContext = createContext();
@@ -61,19 +62,13 @@ const Routing = () => {
         <Search />
       </Route>
 
-      <Route path="/search1">
+      {/* <Route path="/search1">
         <Search1 />
-      </Route>
+      </Route> */}
 
       <Route>
         <ErrorPage />
       </Route>
-
-      {/* 
-<Route path='/' exact component={Home} />
-          <Route path='/contact' component={Contact} />
-          <Route path='/influencers' component={Influencers} />
-          <Route path='/sign-up' component={SignUp} /> */}
     </Switch>
   );
 };
@@ -87,6 +82,7 @@ const App = () => {
     <UserContext.Provider value={{ state, dispatch }}>
       <Navbar1 />
       <Routing />
+      <Footer />
     </UserContext.Provider>
   );
 };

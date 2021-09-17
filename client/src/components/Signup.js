@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import signpic from "./images/signup.svg";
+import { /* NavLink, */ useHistory } from "react-router-dom";
+// import signpic from "./images/signup.svg";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -82,10 +82,9 @@ const Signup = () => {
               <h2 className="form-title">Sign Up</h2>
               <form method="POST" className="register-form" id="register-form">
                 <div className="form-group">
-                  <label htmlFor="name">
-                    <i className="zmdi zmdi-account material-icons-name"></i>
-                  </label>
+                  <label htmlFor="name"></label>
                   <input
+                    className="form-control"
                     type="text"
                     name="name"
                     id="name"
@@ -97,9 +96,10 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">
-                    <i className="zmdi zmdi-email material-icons-name"></i>
+                    {/* <i className="zmdi zmdi-email material-icons-name"></i> */}
                   </label>
                   <input
+                    className="form-control"
                     type="email"
                     name="email"
                     id="email"
@@ -111,7 +111,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">
-                    <i className="zmdi zmdi-phone-in-talk material-icons-name"></i>
+                    {/* <i className="zmdi zmdi-phone-in-talk material-icons-name"></i> */}
                   </label>
                   <input
                     type="number"
@@ -125,7 +125,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="work">
-                    <i className="zmdi zmdi-slideshow material-icons-name"></i>
+                    {/* <i className="zmdi zmdi-slideshow material-icons-name"></i> */}
                   </label>
                   <input
                     type="text"
@@ -139,7 +139,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">
-                    <i className="zmdi zmdi-lock material-icons-name"></i>
+                    {/* <i className="zmdi zmdi-lock material-icons-name"></i> */}
                   </label>
                   <input
                     type="password"
@@ -153,7 +153,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="cpassword">
-                    <i className="zmdi zmdi-lock material-icons-name"></i>
+                    {/* <i className="zmdi zmdi-lock material-icons-name"></i> */}
                   </label>
                   <input
                     type="password"
@@ -200,14 +200,14 @@ const Signup = () => {
               </form>
             </div>
 
-            <div className="signup-image">
+            {/* <div className="signup-image">
               <figure>
                 <img src={signpic} alt="registration pic" />
               </figure>
               <NavLink to="/login" className="signup-image-link">
                 I am already register
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

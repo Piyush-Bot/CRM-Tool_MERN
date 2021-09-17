@@ -21,12 +21,6 @@ const Search1 = () => {
     );
     return options;
   }
-  /* 
-function optionSelected(e) {
-    this.setState({
-      filterOption: e.target.value,
-    });
-  } */
 
   // handle change event of the country dropdown
   const handleCategoryChange = (val) => {
@@ -71,7 +65,7 @@ function optionSelected(e) {
       <br />
       <div className="row">
         <div className="col-md-2">
-          {/*  <div className="Search">
+          <div className="Search">
             <input
               type="text"
               placeholder="Search...."
@@ -96,7 +90,7 @@ function optionSelected(e) {
                   </div>
                 );
               })}
-          </div> */}
+          </div>
         </div>
         <div className="col-md-2">
           <b>Category</b>

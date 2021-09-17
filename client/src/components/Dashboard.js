@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import FeaturedInfo from "./campaign/FeaturedInfo";
-import WidgetLg from "./widget/WidgetLg";
-import WidgetSm from "./widget/WidgetSm";
+import FeaturedInfo from "./dashboard/FeaturedInfo";
+import WidgetLg from "./dashboard/WidgetLg";
+import WidgetSm from "./dashboard/WidgetSm";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState("");

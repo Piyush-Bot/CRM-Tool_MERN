@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import "./search.css";
+// import { Button } from "./Button";
 import data from "./data.json";
-import { useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
 import ListItemText from "@material-ui/core/ListItemText";
 import Select from "@material-ui/core/Select";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -19,6 +16,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import XLSX from "xlsx";
 
 const headers = ["Categories", "Genre", "City", "Gender"];
 
@@ -51,7 +49,6 @@ const columns = [
     align: "right",
   },
 ];
-//const [searchTerm, setSearchTerm] = useState({});
 
 export default class Search extends Component {
   constructor() {
@@ -65,6 +62,24 @@ export default class Search extends Component {
       // searchTerm: [],
     };
   }
+
+  downloadExcel = () => {
+    console.log("this.state.filteredData-----", this.state.filteredData);
+    const newData = this.state.filteredData.map((row) => {
+      console.log("row----", row);
+      delete row.tableData;
+      return row;
+    });
+    const workSheet = XLSX.utils.json_to_sheet(newData);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "students");
+    //Buffer
+    let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
+    //Binary string
+    XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
+    //Download
+    XLSX.writeFile(workBook, "StudentsData.xlsx");
+  };
 
   handleChangePage = (event, newPage) => {
     this.setState({
@@ -85,42 +100,14 @@ export default class Search extends Component {
     });
   }
 
-  renderTableData(data) {
-    return data.map((element, i) => (
-      <tr key={i}>
-        <td>{element.Categories}</td>
-        <td>{element.Genre}</td>
-        <td>{element.Name}</td>
-        <td>{element.Age}</td>
-        <td>{element.City}</td>
-        <td>{element.Gender}</td>
-      </tr>
-    ));
-  }
-  // display values in input when selected
   getdisplayvalue(data) {
-    if (!data.includes('')) {
+    if (!data.includes("")) {
       const modifiyedVal = data.map((el) => Object.entries(el)[0][1]);
       return modifiyedVal.join(" , ");
     }
-    if (data.includes('')) {
-      return '';
+    if (data.includes("")) {
+      return "";
     }
-  }
-
-  renderFilterOptions(filterOption) {
-    if (filterOption) {
-      let options = Array.from(
-        new Set(data.map((element) => element[filterOption]))
-      );
-      return options.map((option, i) => (
-        <option key={i} value={option}>
-          {" "}
-          {option}{" "}
-        </option>
-      ));
-    }
-    return [];
   }
 
   filterOptionSelected(val) {
@@ -128,8 +115,8 @@ export default class Search extends Component {
     val.forEach((el) => {
       Object.assign(obj, el);
     });
-    const temp = data.filter(
-      (ele) => Object.keys(obj).every((objEl) => ele[objEl] === obj[objEl])
+    const temp = data.filter((ele) =>
+      Object.keys(obj).every((objEl) => ele[objEl] === obj[objEl])
     );
     this.setState((prev) => {
       return {
@@ -140,8 +127,10 @@ export default class Search extends Component {
   }
 
   handleSelectedValue = (value) => {
-    if (!value.includes('')) {
-      const duplicates = value.map((el) => Object.values(el)[0]).filter((e, i, a) => a.indexOf(e) !== i);
+    if (!value.includes("")) {
+      const duplicates = value
+        .map((el) => Object.values(el)[0])
+        .filter((e, i, a) => a.indexOf(e) !== i);
       value = value.filter((el) => !duplicates.includes(Object.values(el)[0]));
       this.setState((prev) => {
         return {
@@ -151,31 +140,46 @@ export default class Search extends Component {
       });
       this.filterOptionSelected(value);
     }
-    if (value.includes('')) {
+    if (value.includes("")) {
       this.setState((prev) => {
         return {
           ...prev,
           filteredData: data,
-          selectedOption: []
+          selectedOption: [],
         };
       });
     }
   };
-  filterList(e){
+
+  filterList(e) {
     let updateList = data;
-    updateList = updateList.filter(item => {
-      return item.Name.toLowerCase().search(
-        e.target.value.toLowerCase()
-        ) !== -1;
+    updateList = updateList.filter((item) => {
+      return (
+        item.Name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+      );
     });
     this.setState((prev) => {
       return {
         ...prev,
         filteredData: updateList,
-        selectedOption: []
+        selectedOption: [],
       };
     });
   }
+
+  /*  downloadExcel = async () => {
+    const workSheet = XLSX.utils.json_to_sheet(filterData);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_apend_sheet(workBook, workSheet, "Influencer");
+    //Buffer
+    let buf = XLSX.write(workBook, { bookType: "xslx", type: "buffer" });
+    //Binary string
+    XLSX.write(workBook, { bookType: "xslx", type: "binary" });
+
+XLSX.writeFile(W)
+
+  }; */
+
   render() {
     const makeItems = () => {
       let itemList = [];
@@ -206,166 +210,215 @@ export default class Search extends Component {
 
       return itemList;
     };
+
     let { filterOption, filteredData } = this.state;
     return (
       <>
-        <div className="row">
-          <div className="row">
-            <div className="col-md-2">
-              <div className="Search">
-                <input type="text" placeholder="enter search text" onChange={(e) => this.filterList(e)} />
-              </div>
-            </div>
+        <div className="filter-container">
+          <section className="filter-subscription">
+            <p className="filter-subscription-heading">
+              <h1>IRM SEARCH BAR</h1>
+            </p>
+            {/* <p className="filter-subscription-text">Register to Join</p> */}
 
-            <div className="col-md-2">
-              <FormControl>
-                <InputLabel htmlFor="grouped-select">Filter By:-</InputLabel>
+            {/* filters through select */}
+            <div className="filter-input-areas">
+              <div className="filter-input">
+                <span id="basic-addon1">Filter By:-</span>
                 <Select
-                  className="select"
+                  placeholder="Username"
+                  aria-label="Username"
+                  // aria-describedby="basic-addon1"
                   defaultValue=""
-                  id="grouped-select"
                   multiple
                   value={this.state.selectedOption}
                   renderValue={(selected) => this.getdisplayvalue(selected)}
                   onChange={(e) => this.handleSelectedValue(e.target.value)}
                 >
-                  <MenuItem value="">
+                  <MenuItem id="selectItems" value="">
                     <em>None</em>
                   </MenuItem>
-
                   {makeItems()}
                 </Select>
-              </FormControl>
-            </div>
-            <div className="col-md-8">hellllllooooooooo</div>
-          </div>
-          <hr />
-          <hr />
-          <br />
-          <br />
-          <div className="row">
-            <div className="col-md-2"></div>
-            <div className="col-md-8">
-              <div className="container">
-                <Paper className="paperroot">
-                  <TableContainer className="papercontainer">
-                    <Table stickyHeader aria-label="sticky table">
-                      <TableHead>
-                        <TableRow>
-                          {columns.map((column) => (
-                            <TableCell
-                              key={column.id}
-                              align={column.align}
-                              style={{ minWidth: column.minWidth }}
-                            >
-                              {column.label}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {this.state.filteredData
-                          .slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )
-                          .map((row) => {
-                            return (
-                              <TableRow
-                                hover
-                                role="checkbox"
-                                tabIndex={-1}
-                                key={row.Name}
-                              >
-                                {columns.map((column) => {
-                                  const value = row[column.id];
-                                  return (
-                                    <TableCell
-                                      key={column.id}
-                                      align={column.align}
-                                    >
-                                      {column.format &&
-                                      typeof value === "number"
-                                        ? column.format(value)
-                                        : value}
-                                    </TableCell>
-                                  );
-                                })}
-                              </TableRow>
-                            );
-                          })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                  <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={data.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={(e, n) => this.handleChangePage(e, n)}
-                    onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
-                  />
-                </Paper>
-                {filteredData.length === 0 ? <p>no result found</p> : null}
               </div>
+
+              {/* search here */}
+              <div className="search-input">
+                <div class="input-icons">
+                  <input
+                    type="text"
+                    class="input-field"
+                    placeholder="Search Name"
+                    onChange={(e) => this.filterList(e)}
+                  />
+                  <i className="fa fa-search icon"></i>
+                </div>
+              </div>
+
+              <button
+                className="btn btn-success btn-sm"
+                onClick={this.downloadExcel}
+              >
+                Export to Excel
+              </button>
             </div>
-            <div className="col-md-2"></div>
+          </section>
+        </div>
+
+        {/* table shown */}
+
+        <div className=" main-table-container row">
+          <div className="col-md-1"></div>
+          <div className="col-md-5">
+            <div className="table-container">
+              <Paper className="paperroot">
+                <TableContainer className="papercontainer">
+                  <Table
+                    title="Influencer Table1"
+                    stickyHeader
+                    aria-label="sticky table"
+                  >
+                    <TableHead>
+                      {/* <button
+                        title="Export Excel"
+                        className="k-button k-primary"
+                        onClick={excelExport}
+                      >
+                        Export to Excel
+                      </button> */}
+                      <TableRow title="Heading Row">
+                        {columns.map((column) => (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.filteredData
+                        .slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                        .map((row) => {
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.Name}
+                              title="Body Row"
+                            >
+                              {columns.map((column) => {
+                                const value = row[column.id];
+                                return (
+                                  <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                  >
+                                    {column.format && typeof value === "number"
+                                      ? column.format(value)
+                                      : value}
+                                  </TableCell>
+                                );
+                              })}
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[10, 25, 100]}
+                  component="div"
+                  count={data.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={(e, n) => this.handleChangePage(e, n)}
+                  onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
+                />
+              </Paper>
+              {filteredData.length === 0 ? <p>no result found</p> : null}
+            </div>
           </div>
         </div>
+        {/* <div className="table-container">
+          <Paper className="paperroot">
+            <TableContainer className="papercontainer">
+              <Table
+                title="Influencer Table1"
+                stickyHeader
+                aria-label="sticky table"
+              >
+                <TableHead>
+                  <TableRow title="Heading Row">
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.state.filteredData
+                    .slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.Name}
+                          title="Body Row"
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={data.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onPageChange={(e, n) => this.handleChangePage(e, n)}
+              onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
+            />
+          </Paper>
+          {filteredData.length === 0 ? <p>no result found</p> : null}
+        </div> */}
       </>
     );
   }
 }
 
-// const columns = [
-//   {
-//     title: "Name",
-//     field: "name",
-//   },
-//   { title: "Color", field: "color", filtering: false },
-//   { title: "Quantity", field: "quantity", filtering: false },
-//   { title: "ID", field: "id", filtering: false, hidden: true }
-// ];
-
-// export default function App() {
-//   return (
-
-//   );
-// }
-
-/*  <div className="Search">
-          <input
-            type="text"
-            placeholder="Search...."
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-          />
-          {data
-            .filter((val) => {
-              if (searchTerm == "") {
-                return val;
-              } else if (
-                val.Name.toLowerCase().includes(searchTerm.toLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map((val, key) => {
-              return (
-                <div className="user">
-                  <p>{val.Name}</p>
-                </div>
-              );
-            })}
-        </div> */
-/*  */
-
-//render(<App />, document.getElementById("root"));
-
-/*
+{
+  /* 
 import React, { Component } from 'react';
 import { CSVLink } from "react-csv";
  
@@ -405,7 +458,7 @@ className AsyncCSV extends Component {
  
     return (
       <div>
-        <input type="button" value="Export to CSV (Async)" onClick={this.downloadReport} />
+        <input type="button" value="Export to CSV (Async)"  onClick={this.downloadReport} />
         <CSVLink
           headers={headers}
           filename="Clue_Mediator_Report_Async.csv"
@@ -418,7 +471,5 @@ className AsyncCSV extends Component {
 }
  
 export default AsyncCSV;
-
-
-
-*/
+ */
+}

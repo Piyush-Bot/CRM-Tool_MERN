@@ -39,8 +39,8 @@ const Navbar1 = () => {
             </Link>
           </li>
 
-          <li className="nav-item">
-            <Link to="/contact" className="nav-links" onClick={closeMobileMenu}>
+          <li>
+            <Link to="/contact" onClick={closeMobileMenu}>
               Contact
             </Link>
           </li>
