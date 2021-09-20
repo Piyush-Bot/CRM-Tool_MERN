@@ -1,11 +1,39 @@
 .filter-container {
-  background-color: #1b1919;
-  padding: 0rem 0 1rem 0;
+  background-image: url("../images/img-home.jpg");
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding: 4rem 0 0rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  background-blend-mode: color-burn;
 }
+
+/* .custom-shape-divider-bottom-1631877305 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1631877305 svg {
+  position: relative;
+  display: block;
+  width: calc(112% + 1.3px);
+  height: 284px;
+}
+
+.custom-shape-divider-bottom-1631877305 .shape-fill {
+  fill: #ffffff;
+} */
 
 .filter-subscription {
   display: flex;

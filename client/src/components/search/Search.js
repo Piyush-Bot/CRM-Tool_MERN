@@ -59,7 +59,6 @@ export default class Search extends Component {
       filteredData: data,
       page: 0,
       rowsPerPage: 10,
-      // searchTerm: [],
     };
   }
 
@@ -72,13 +71,13 @@ export default class Search extends Component {
     });
     const workSheet = XLSX.utils.json_to_sheet(newData);
     const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workBook, workSheet, "students");
+    XLSX.utils.book_append_sheet(workBook, workSheet, "Influencer");
     //Buffer
     let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
     //Binary string
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
     //Download
-    XLSX.writeFile(workBook, "StudentsData.xlsx");
+    XLSX.writeFile(workBook, "InfluencerData.xlsx");
   };
 
   handleChangePage = (event, newPage) => {
@@ -167,19 +166,6 @@ export default class Search extends Component {
     });
   }
 
-  /*  downloadExcel = async () => {
-    const workSheet = XLSX.utils.json_to_sheet(filterData);
-    const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_apend_sheet(workBook, workSheet, "Influencer");
-    //Buffer
-    let buf = XLSX.write(workBook, { bookType: "xslx", type: "buffer" });
-    //Binary string
-    XLSX.write(workBook, { bookType: "xslx", type: "binary" });
-
-XLSX.writeFile(W)
-
-  }; */
-
   render() {
     const makeItems = () => {
       let itemList = [];
@@ -263,6 +249,19 @@ XLSX.writeFile(W)
               </button>
             </div>
           </section>
+          {/* <div className="custom-shape-divider-bottom-1631877305">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                className="shape-fill"
+              ></path>
+            </svg>
+          </div> */}
         </div>
 
         {/* table shown */}
@@ -279,13 +278,6 @@ XLSX.writeFile(W)
                     aria-label="sticky table"
                   >
                     <TableHead>
-                      {/* <button
-                        title="Export Excel"
-                        className="k-button k-primary"
-                        onClick={excelExport}
-                      >
-                        Export to Excel
-                      </button> */}
                       <TableRow title="Heading Row">
                         {columns.map((column) => (
                           <TableCell
@@ -347,71 +339,6 @@ XLSX.writeFile(W)
             </div>
           </div>
         </div>
-        {/* <div className="table-container">
-          <Paper className="paperroot">
-            <TableContainer className="papercontainer">
-              <Table
-                title="Influencer Table1"
-                stickyHeader
-                aria-label="sticky table"
-              >
-                <TableHead>
-                  <TableRow title="Heading Row">
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        style={{ minWidth: column.minWidth }}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.filteredData
-                    .slice(
-                      this.state.page * this.state.rowsPerPage,
-                      this.state.page * this.state.rowsPerPage +
-                        this.state.rowsPerPage
-                    )
-                    .map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row.Name}
-                          title="Body Row"
-                        >
-                          {columns.map((column) => {
-                            const value = row[column.id];
-                            return (
-                              <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === "number"
-                                  ? column.format(value)
-                                  : value}
-                              </TableCell>
-                            );
-                          })}
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={data.length}
-              rowsPerPage={this.state.rowsPerPage}
-              page={this.state.page}
-              onPageChange={(e, n) => this.handleChangePage(e, n)}
-              onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
-            />
-          </Paper>
-          {filteredData.length === 0 ? <p>no result found</p> : null}
-        </div> */}
       </>
     );
   }

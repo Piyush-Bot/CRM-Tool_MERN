@@ -10,10 +10,6 @@ import FormLabel from "@material-ui/core/FormLabel";
 
 const Signup = () => {
   const [userType, setuserType] = React.useState("user");
-
-  // const handleInputs = (event) => {
-  //   setuserType(event.target.value);
-  //};
   const history = useHistory();
   const [user, setUser] = useState({
     name: "",

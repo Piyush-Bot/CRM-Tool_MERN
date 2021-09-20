@@ -14,7 +14,7 @@ const InfluencerList = () => {
 
   const userList = async () => {
     try {
-      const res = await fetch("/getdatal", {
+      const res = await fetch("/displayaUserlist", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

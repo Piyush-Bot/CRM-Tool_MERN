@@ -16,7 +16,6 @@ import { initialState, reducer } from "./components/reducer/UseReducer";
 import List from "./components/Influencer/List";
 import Search from "./components/search/Search";
 import Footer from "./components/home/Footer";
-// import Search1 from "./components/search/Search1";
 
 // we create a contextAPI
 export const UserContext = createContext();
@@ -28,7 +27,7 @@ const Routing = () => {
         <Home />
       </Route>
 
-      <Route path="/list">
+      <Route path="/userlist">
         <List />
       </Route>
 
@@ -61,10 +60,6 @@ const Routing = () => {
       <Route path="/search">
         <Search />
       </Route>
-
-      {/* <Route path="/search1">
-        <Search1 />
-      </Route> */}
 
       <Route>
         <ErrorPage />

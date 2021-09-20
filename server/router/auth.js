@@ -19,7 +19,7 @@ router.get("/verifyEmail/:email", async (req, res) => {
     console.log(email);
     await User.findOneAndUpdate({ email: email }, { emailVerified: true });
     // res.sendFile(path.join(__dirname, "/verifyEmail.html"));
-    res.send(`mail`);
+    res.send(`verify account from your mail`);
   } catch (err) {
     throw err;
   }
@@ -114,8 +114,8 @@ router.get("/getdata", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
 
-router.get("/getdatal", async (req, res) => {
-  // console.log(`Hello my getdatalllllllll`);
+router.get("/displayaUserlist", async (req, res) => {
+  // console.log(`User list`);
   const users = await User.find(
     {},
     { password: 0, cpassword: 0, tokens: 0, _id: 0 }
@@ -131,26 +131,3 @@ router.get("/logout", (req, res) => {
   res.status(200).send(" User Logout");
 });
 module.exports = router;
-
-//using promise
-//  router.post('/register',  async (req, res) => {
-
-//     const {name,email,phone,work, password ,cpassword} = req.body;
-
-//     if(!name || !email || !phone ||!work || !password || !cpassword)
-//         {
-//         return res.status(422).json({error: "plz fill rest of the fields"});
-//         }
-//     User.findOne({ email:email })
-//         .then((userExist) =>{
-//             if(userExist){
-//             return res.status(422).json({ error: "email already exist"  });
-//             }
-//             const user = new User({ name,email,phone,work,password,cpassword });
-
-//             user.save().then(()=> {
-//                 res.status(201).json({ message : "registered successful"});
-//             }).catch((err) => res.status(500).json({ error : "failed to registered"}));
-
-//     }).catch(err => { console.log(err); });
-//  });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button } from "./Button";
+// import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { UserContext } from "../../App";
@@ -33,41 +33,33 @@ const Navbar1 = () => {
     if (state) {
       return (
         <>
-          <li className="nav-item">
-            <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-              Home
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/contact" onClick={closeMobileMenu}>
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/about"
-              className="nav-links-mobile"
-              onClick={closeMobileMenu}
-            >
-              About Me
-            </Link>
-          </li>
           <li>
             <Link
               to="/dashboard"
-              className="nav-links-mobile"
+              className="nav-links"
               onClick={closeMobileMenu}
             >
               Dashboard
             </Link>
           </li>
+
           <li>
             <Link
-              to="/logout"
-              className="nav-links-mobile"
+              to="/userlist"
+              className="nav-links"
               onClick={closeMobileMenu}
             >
+              Reg.User
+            </Link>
+          </li>
+          <li>
+            <Link to="/search" className="nav-links" onClick={closeMobileMenu}>
+              IRM Tool
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/logout" className="nav-links" onClick={closeMobileMenu}>
               Logout
             </Link>
           </li>
@@ -87,11 +79,11 @@ const Navbar1 = () => {
             </Link>
           </li>
 
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/list" className="nav-links" onClick={closeMobileMenu}>
               Influencers
             </Link>
-          </li>
+          </li> */}
 
           <li className="nav-item">
             <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
@@ -100,11 +92,7 @@ const Navbar1 = () => {
           </li>
 
           <li>
-            <Link
-              to="/signup"
-              className="nav-links-mobile"
-              onClick={closeMobileMenu}
-            >
+            <Link to="/signup" className="nav-links" onClick={closeMobileMenu}>
               Register
             </Link>
           </li>
@@ -127,7 +115,7 @@ const Navbar1 = () => {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <RenderList />
           </ul>
-          {button && <Button buttonStyle="btn--outline">Register</Button>}
+          {/* {button && <Button buttonStyle="btn--outline">Register</Button>} */}
         </div>
       </nav>
     </>
