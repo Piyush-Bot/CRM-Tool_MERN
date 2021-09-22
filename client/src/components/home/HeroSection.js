@@ -1,6 +1,6 @@
 import React from "react";
 //import "../home/Home.css";
-import { Button } from "./Button";
+// import { Button } from "./Button";
 import "../home/HeroSection.css";
 
 const HeroSection = () => {
@@ -11,21 +11,21 @@ const HeroSection = () => {
         <h1>Scroll Lab</h1>
         <p>What are you waiting for? (Hero Section)</p>
         <div className="hero-btns">
-          <Button
+          <button
             className="btns"
             buttonStyle="btn--outline"
             buttonSize="btn--large"
           >
             GET STARTED
-          </Button>
-          <Button
+          </button>
+          <button
             className="btns"
             buttonStyle="btn--primary"
             buttonSize="btn--large"
             onClick={console.log("hey")}
           >
             WATCH TRAILER <i className="far fa-play-circle" />
-          </Button>
+          </button>
         </div>
       </div>
     </>

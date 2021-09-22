@@ -1,21 +1,19 @@
 import React, { useReducer, createContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import "./App.css";
-//import "./home/Home.css"; giving error
-import Navbar1 from "./components/home/Navbar1";
+import "./components/css/App.css";
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import About from "./components/About";
-import Contact from "./components/Contact";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ErrorPage from "./components/Errorpage";
 import Dashboard from "./components/Dashboard";
 import Logout from "./components/Logout";
 import { initialState, reducer } from "./components/reducer/UseReducer";
-import List from "./components/Influencer/List";
 import Search from "./components/search/Search";
-import Footer from "./components/home/Footer";
+import Footer from "./components/Footer";
+// import Login2 from "./components/Login2";
+// import Search1 from "./components/search/Search1";
 
 // we create a contextAPI
 export const UserContext = createContext();
@@ -27,19 +25,9 @@ const Routing = () => {
         <Home />
       </Route>
 
-      <Route path="/userlist">
-        <List />
-      </Route>
-
-      {/* <Route path="/list" component={List} /> */}
-
-      <Route path="/about">
-        <About />
-      </Route>
-
-      <Route path="/contact">
-        <Contact />
-      </Route>
+      {/* <Route path="/search1">
+        <Search1 />
+      </Route> */}
 
       <Route path="/login">
         <Login />
@@ -75,7 +63,7 @@ const App = () => {
 
   return (
     <UserContext.Provider value={{ state, dispatch }}>
-      <Navbar1 />
+      <Navbar />
       <Routing />
       <Footer />
     </UserContext.Provider>

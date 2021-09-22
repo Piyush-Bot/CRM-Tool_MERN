@@ -65,7 +65,7 @@ const Search1 = () => {
       <br />
       <div className="row">
         <div className="col-md-2">
-          <div className="Search">
+          {/* <div className="Search">
             <input
               type="text"
               placeholder="Search...."
@@ -90,7 +90,7 @@ const Search1 = () => {
                   </div>
                 );
               })}
-          </div>
+          </div> */}
         </div>
         <div className="col-md-2">
           <b>Category</b>

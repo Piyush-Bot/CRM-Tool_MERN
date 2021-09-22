@@ -104,18 +104,19 @@ router.post("/signin", async (req, res) => {
 
 // about us
 
-router.get("/about", authenticate, (req, res) => {
-  //console.log(`Hello my About`);
-  res.send(req.rootUser);
-});
+// router.get("/about", authenticate, (req, res) => {
+//   //console.log(`Hello my About`);
+//   res.send(req.rootUser);
+// });
+
 //   get user data for influencer and home page
 router.get("/getdata", authenticate, (req, res) => {
   //console.log(`Hello my About`);
   res.send(req.rootUser);
 });
 
+// console.log(`User list`);
 router.get("/displayaUserlist", async (req, res) => {
-  // console.log(`User list`);
   const users = await User.find(
     {},
     { password: 0, cpassword: 0, tokens: 0, _id: 0 }
@@ -125,7 +126,6 @@ router.get("/displayaUserlist", async (req, res) => {
 });
 
 // logout
-
 router.get("/logout", (req, res) => {
   res.clearCookie("jwtoken", { path: "/" });
   res.status(200).send(" User Logout");

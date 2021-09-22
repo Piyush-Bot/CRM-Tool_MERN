@@ -3,7 +3,6 @@ import React from "react";
 
 import HeroSection from "./home/HeroSection";
 import Cards from "./home/Cards";
-// import Footer from "./home/Footer";
 import { Review } from "./home/review/Review";
 
 const Home = () => {
@@ -12,7 +11,6 @@ const Home = () => {
       <HeroSection />
       <Cards />
       <Review />
-      {/* <Footer /> */}
     </>
   );
 };

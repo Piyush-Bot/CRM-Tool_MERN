@@ -92,7 +92,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">
-                    {/* <i className="zmdi zmdi-email material-icons-name"></i> */}
+                    <i className="zmdi zmdi-email material-icons-name"></i>
                   </label>
                   <input
                     className="form-control"
@@ -107,7 +107,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">
-                    {/* <i className="zmdi zmdi-phone-in-talk material-icons-name"></i> */}
+                    <i className="zmdi zmdi-phone-in-talk material-icons-name"></i>
                   </label>
                   <input
                     type="number"
@@ -121,7 +121,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="work">
-                    {/* <i className="zmdi zmdi-slideshow material-icons-name"></i> */}
+                    <i className="zmdi zmdi-slideshow material-icons-name"></i>
                   </label>
                   <input
                     type="text"
@@ -135,7 +135,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">
-                    {/* <i className="zmdi zmdi-lock material-icons-name"></i> */}
+                    <i className="zmdi zmdi-lock material-icons-name"></i>
                   </label>
                   <input
                     type="password"
@@ -149,7 +149,7 @@ const Signup = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="cpassword">
-                    {/* <i className="zmdi zmdi-lock material-icons-name"></i> */}
+                    <i className="zmdi zmdi-lock material-icons-name"></i>
                   </label>
                   <input
                     type="password"

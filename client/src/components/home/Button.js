@@ -20,7 +20,11 @@ export const Button = ({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
-    <Link to="/signup" className="btn-mobile">
+    <Link
+      to="//www.youtube.com/watch?v=JaUCiKTNBxQ"
+      target="_blank"
+      aria-label="Facebook"
+    >
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
