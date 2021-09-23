@@ -124,3 +124,6 @@
 .papercontainer {
   max-height: 65vh;
 }
+.search__wrapper {
+  margin-left: 250px;
+}

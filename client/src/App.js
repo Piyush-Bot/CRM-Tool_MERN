@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Search from "./components/search/Search";
 import IRMreport from "./components/IRMreport";
 import DashboardBd from "./components/DashboardBd";
+import SideDrawer from "./components/SideDrawer";
 import Logout from "./components/Logout";
 import { initialState, reducer } from "./components/reducer/UseReducer";
 import Footer from "./components/Footer";
@@ -22,8 +23,10 @@ export const UserContext = createContext();
 
 const Routing = () => {
   return (
+    <>
     <Switch>
       <Route exact path="/">
+      <Navbar />
         <Home />
       </Route>
 
@@ -32,6 +35,7 @@ const Routing = () => {
       </Route> */}
 
       <Route path="/login">
+      <Navbar />
         <Login />
       </Route>
 
@@ -44,13 +48,16 @@ const Routing = () => {
       </Route>
 
       <Route path="/irmreport">
+      <SideDrawer/>
         <IRMreport />
       </Route>
 
       <Route path="/dashboard">
+      <SideDrawer/>
         <Dashboard />
       </Route>
       <Route path="/search">
+      <SideDrawer/>
         <Search />
       </Route>
 
@@ -66,6 +73,7 @@ const Routing = () => {
         <ErrorPage />
       </Route>
     </Switch>
+    </>
   );
 };
 
@@ -76,7 +84,6 @@ const App = () => {
 
   return (
     <UserContext.Provider value={{ state, dispatch }}>
-      <Navbar />
       <Routing />
       <Footer />
     </UserContext.Provider>

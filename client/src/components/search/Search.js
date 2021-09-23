@@ -200,6 +200,7 @@ export default class Search extends Component {
     let { filterOption, filteredData } = this.state;
     return (
       <>
+        <div className="search__wrapper">
         <div className="filter-container">
           <section className="filter-subscription">
             <p className="filter-subscription-heading">
@@ -338,6 +339,7 @@ export default class Search extends Component {
               {filteredData.length === 0 ? <p>no result found</p> : null}
             </div>
           </div>
+        </div>
         </div>
       </>
     );

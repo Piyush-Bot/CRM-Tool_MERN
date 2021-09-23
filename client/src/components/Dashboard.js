@@ -30,9 +30,9 @@ const Dashboard = () => {
   return (
     <>
       <div className="row">
-        <div className="col-md-2">
+        {/* <div className="col-md-2">
           <Sidebar />
-        </div>
+        </div> */}
 
         <div className="col-md-10">
           <div className="row">
