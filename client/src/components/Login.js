@@ -1,8 +1,11 @@
 import React, { useState, useContext } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { /* NavLink, */ useHistory } from "react-router-dom";
 import { UserContext } from "../App";
 import "./css/Login.css";
 import loginImage from "./images/SC_logo.png";
+import Button from "@mui/material/Button";
+// import SendIcon from "@mui/icons-material/Send";
+import Stack from "@mui/material/Stack";
 
 const Login = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -36,8 +39,8 @@ const Login = () => {
       console.log(fdata);
       window.alert("Login Successfull");
       fdata.type === "admin"
-        ? history.push("/contact")
-        : history.push("/dashboard");
+        ? history.push("/dashboard")
+        : history.push("/dashboardbd");
     }
   };
 
@@ -51,14 +54,11 @@ const Login = () => {
                 <figure>
                   <img src={loginImage} alt="login logo" />
                 </figure>
-                <NavLink to="/signup" className="signup-image-link">
-                  Create an Account
-                </NavLink>
               </div>
             </div>
             <div className="col-md-5">
               <div className="login-form">
-                <h2 className="form-title">Sign In</h2>
+                <h2 className="form-title">SIGN IN</h2>
                 <form
                   method="POST"
                   className="register-form"
@@ -96,7 +96,7 @@ const Login = () => {
                     />
                   </div>
 
-                  <div>
+                  {/* <div>
                     <input
                       className="login-form-button"
                       type="submit"
@@ -106,8 +106,28 @@ const Login = () => {
                       value="Log In"
                       onClick={loginUser}
                     />
-                  </div>
+                  </div> */}
+                  <Stack direction="row" spacing={2}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      type="submit"
+                      name="signin"
+                      id="signin"
+                      className="form-submit"
+                      value="Log In"
+                      onClick={loginUser}
+                    >
+                      Submit
+                    </Button>
+                    {/* <Button variant="contained" endIcon={<SendIcon />}>
+                      Send
+                    </Button> */}
+                  </Stack>
                 </form>
+                {/* <NavLink to="/signup" className="signup-image-link">
+                  Create an Account
+                </NavLink> */}
               </div>
             </div>
           </div>

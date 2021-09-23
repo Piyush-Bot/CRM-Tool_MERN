@@ -10,6 +10,7 @@ require("./db/conn");
 app.use(express.json());
 // link of router
 app.use(require("./router/auth"));
+app.use(require("./router/influencer"));
 
 //for localhost
 const PORT = process.env.PORT;

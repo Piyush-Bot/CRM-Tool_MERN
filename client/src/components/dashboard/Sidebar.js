@@ -22,26 +22,31 @@ const sidebar = () => {
       <div className="sidebar">
         <div className="sidebarWrapper">
           <div className="sidebarMenu">
-            <h3 className="sidebarTitle">Dashboard</h3>
+            <h3 className="sidebarTitle">IRM Navigation</h3>
             <ul className="sidebarList">
-              <Link to="/" className="link">
+              <Link to="/dashboard" className="link">
                 <li className="sidebarListItem active">
                   <LineStyle className="sidebarIcon" />
-                  Home
+                  Dashboard
                 </li>
               </Link>
-              <li className="sidebarListItem">
-                <Timeline className="sidebarIcon" />
-                Analytics
-              </li>
-              <li className="sidebarListItem">
-                <TrendingUp className="sidebarIcon" />
-                Sales
-              </li>
+
+              <Link to="/search" className="link">
+                <li className="sidebarListItem">
+                  <Timeline className="sidebarIcon" />
+                  IRM Tool
+                </li>
+              </Link>
+              <Link to="/irmreport" className="link">
+                <li className="sidebarListItem">
+                  <BarChart className="sidebarIcon" />
+                  Reports
+                </li>
+              </Link>
             </ul>
           </div>
           <div className="sidebarMenu">
-            <h3 className="sidebarTitle">Quick Menu</h3>
+            <h3 className="sidebarTitle">Demo Menu</h3>
             <ul className="sidebarList">
               <Link to="/users" className="link">
                 <li className="sidebarListItem">
@@ -60,8 +65,8 @@ const sidebar = () => {
                 Transactions
               </li>
               <li className="sidebarListItem">
-                <BarChart className="sidebarIcon" />
-                Reports
+                <TrendingUp className="sidebarIcon" />
+                Sales
               </li>
             </ul>
           </div>

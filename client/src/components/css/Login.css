@@ -1,5 +1,7 @@
 .main-conatiner {
   padding: 10px;
+  /* background-image: url("../images/SC_logo\ _1.ico");
+  background-position-y: 50; */
 }
 
 /* .signin-form {
@@ -7,26 +9,42 @@
 }
 */
 
-img {
+.login-image img {
   display: block;
   padding: 200px;
-  border-right: solid 2px;
-
+  border-right: solid rgb(255, 0, 0) 2px;
   width: 100%;
 }
 
+.col-md-5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 100px;
+  padding-right: 100px;
+}
 .login-form {
+  z-index: 105;
+  background: #f7eeea;
   flex: 2;
-
-  margin: 200px 80px 100px;
+  /* margin: 170px 80px 100px; */
   height: 50vh;
+  background-position-x: 50;
+  z-index: 50;
   padding: 30px;
   border-radius: 10px;
   cursor: pointer;
   -webkit-box-shadow: 0px 0px 15px 10px rgba(9, 24, 243, 0.377);
-  box-shadow: 0px 0px 15px -1px rgba(64, 216, 18, 0.75);
+  box-shadow: 0px 0px 15px -1px rgba(59, 122, 240, 0.75);
 }
 
+.form-title {
+  background-color: rgb(55, 125, 51);
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 3vw;
+  padding-left: 10px;
+}
 .form-group {
   margin-bottom: 15px;
 }

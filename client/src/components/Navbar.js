@@ -34,22 +34,6 @@ const Navbar1 = () => {
       return (
         <>
           <li>
-            <Link
-              to="/dashboard"
-              className="nav-links"
-              onClick={closeMobileMenu}
-            >
-              Dashboard
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/search" className="nav-links" onClick={closeMobileMenu}>
-              IRM Tool
-            </Link>
-          </li>
-
-          <li>
             <Link to="/logout" className="nav-links" onClick={closeMobileMenu}>
               Logout
             </Link>
@@ -70,12 +54,6 @@ const Navbar1 = () => {
               Login
             </Link>
           </li>
-
-          {/* <li>
-            <Link to="/signup" className="nav-links" onClick={closeMobileMenu}>
-              Register
-            </Link>
-          </li> */}
         </>
       );
     }
@@ -87,7 +65,6 @@ const Navbar1 = () => {
         <div className="navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
             ScrollLabs
-            {/* <i class="zmdi zmdi-camera" /> */}
           </Link>
           <div className="menu-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"} />

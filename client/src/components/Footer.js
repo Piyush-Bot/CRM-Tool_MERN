@@ -55,7 +55,7 @@ const Footer = () => {
                 {/* <i class="zmdi zmdi-camera" /> */}
               </Link>
             </div>
-            <small className="website-rights">Social Media</small>
+            {/* <small className="website-rights">Social Media</small> */}
             <div className="social-icons">
               <Link
                 className="social-icon-link facebook"

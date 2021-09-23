@@ -8,11 +8,13 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ErrorPage from "./components/Errorpage";
 import Dashboard from "./components/Dashboard";
+import Search from "./components/search/Search";
+import IRMreport from "./components/IRMreport";
+import DashboardBd from "./components/DashboardBd";
 import Logout from "./components/Logout";
 import { initialState, reducer } from "./components/reducer/UseReducer";
-import Search from "./components/search/Search";
 import Footer from "./components/Footer";
-// import Login2 from "./components/Login2";
+
 // import Search1 from "./components/search/Search1";
 
 // we create a contextAPI
@@ -37,16 +39,27 @@ const Routing = () => {
         <Signup />
       </Route>
 
+      <Route path="/dashboardbd">
+        <DashboardBd />
+      </Route>
+
+      <Route path="/irmreport">
+        <IRMreport />
+      </Route>
+
       <Route path="/dashboard">
         <Dashboard />
+      </Route>
+      <Route path="/search">
+        <Search />
       </Route>
 
       <Route path="/logout">
         <Logout />
       </Route>
 
-      <Route path="/search">
-        <Search />
+      <Route path="/register">
+        <Signup />
       </Route>
 
       <Route>
