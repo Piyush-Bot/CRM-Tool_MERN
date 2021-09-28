@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "./dashboard/Sidebar";
+import FeaturedInfo from "./dashboard/campaign/Campinfo";
+import Map from "./dashboard/map/Map";
+import Chart from "./dashboard/chart/chart";
+import "./css/dashboard.css";
 
 const Dashboard = () => {
-  const [userName, setUserName] = useState("");
+  const [setUserName] = useState("");
   // const [show, setShow] = useState(false);
 
   const userHomePage = async () => {
@@ -29,19 +32,37 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="row">
-        {/* <div className="col-md-2">
-          <Sidebar />
-        </div> */}
+      <div className="dashboard_wrapper">
+        <div className="row">
+          <h4>DASHBOARD</h4>
+          <hr />
 
-        <div className="col-md-10">
+          <div className="hero_section">
+            <div className="row">
+              <div className="col-md-6">
+                <h2>Campaign</h2>
+                <FeaturedInfo />
+              </div>
+
+              <div className="col-md-6">
+                <div className="Map-chart">
+                  <Map />
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+
           <div className="row">
             <div className="col-md-8">
-              <h4>DASHBOARD</h4>
-              <hr />
+              <div className="Campaign-chart">
+                <Chart />
+                <div className="Campaign-heading">Campaigns-Graph</div>
+              </div>
             </div>
             <div className="col-md-4">
-              WELCOME
+              <h2> Empty </h2>
+
               <hr />
             </div>
           </div>

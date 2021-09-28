@@ -16,18 +16,18 @@
   width: 100%;
 }
 
-.col-md-5 {
+/* .col-md-5 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 100px;
+  padding-left: 100px;  
   padding-right: 100px;
-}
+} */
 .login-form {
   z-index: 105;
   background: #f7eeea;
   flex: 2;
-  /* margin: 170px 80px 100px; */
+  margin: 100px 80px 100px 80px;
   height: 50vh;
   background-position-x: 50;
   z-index: 50;

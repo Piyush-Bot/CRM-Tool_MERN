@@ -8,15 +8,13 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ErrorPage from "./components/Errorpage";
 import Dashboard from "./components/Dashboard";
-import Search from "./components/search/Search";
-import IRMreport from "./components/IRMreport";
-import DashboardBd from "./components/DashboardBd";
+import Tool from "./components/irmtool/Tool";
+import Report from "./components/Report";
+// import DashboardBd from "./components/DashboardBd";
 import SideDrawer from "./components/SideDrawer";
 import Logout from "./components/Logout";
 import { initialState, reducer } from "./components/reducer/UseReducer";
 import Footer from "./components/Footer";
-
-// import Search1 from "./components/search/Search1";
 
 // we create a contextAPI
 export const UserContext = createContext();
@@ -24,55 +22,55 @@ export const UserContext = createContext();
 const Routing = () => {
   return (
     <>
-    <Switch>
-      <Route exact path="/">
-      <Navbar />
-        <Home />
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <Navbar />
+          <Home />
+          <Footer />
+        </Route>
 
-      {/* <Route path="/search1">
-        <Search1 />
-      </Route> */}
+        <Route path="/login">
+          <Navbar />
+          <Login />
+          <Footer />
+        </Route>
 
-      <Route path="/login">
-      <Navbar />
-        <Login />
-      </Route>
+        <Route path="/signup">
+          <Navbar />
+          <Signup />
+          <Footer />
+        </Route>
 
-      <Route path="/signup">
-        <Signup />
-      </Route>
+        {/* <Route path="/dashboardbd">
+          <DashboardBd />
+        </Route> */}
 
-      <Route path="/dashboardbd">
-        <DashboardBd />
-      </Route>
+        <Route path="/irmreport">
+          <SideDrawer />
+          <Report />
+        </Route>
 
-      <Route path="/irmreport">
-      <SideDrawer/>
-        <IRMreport />
-      </Route>
+        <Route path="/dashboard">
+          <SideDrawer />
+          <Dashboard />
+        </Route>
+        <Route path="/irmtool">
+          <SideDrawer />
+          <Tool />
+        </Route>
 
-      <Route path="/dashboard">
-      <SideDrawer/>
-        <Dashboard />
-      </Route>
-      <Route path="/search">
-      <SideDrawer/>
-        <Search />
-      </Route>
+        <Route path="/logout">
+          <Logout />
+        </Route>
 
-      <Route path="/logout">
-        <Logout />
-      </Route>
+        <Route path="/register">
+          <Signup />
+        </Route>
 
-      <Route path="/register">
-        <Signup />
-      </Route>
-
-      <Route>
-        <ErrorPage />
-      </Route>
-    </Switch>
+        <Route>
+          <ErrorPage />
+        </Route>
+      </Switch>
     </>
   );
 };
@@ -85,7 +83,6 @@ const App = () => {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <Routing />
-      <Footer />
     </UserContext.Provider>
   );
 };

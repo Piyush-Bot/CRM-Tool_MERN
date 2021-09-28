@@ -7,6 +7,7 @@ const sendMail = require("../services/sendMail.service");
 
 require("../db/conn");
 const User = require("../model/userSchema");
+const Influencer = require("../model/influencerSchema");
 
 router.get("/", (req, res) => {
   res.send(`hello world from server from router`);
@@ -123,6 +124,11 @@ router.get("/displayaUserlist", async (req, res) => {
   );
   res.status(200).json({ data: users });
   //console.log(users);
+});
+
+router.get("/influencerlist", async (req, res) => {
+  let influencerlist = await Influencer.find({});
+  res.status(200).json({ data: influencerlist });
 });
 
 // logout

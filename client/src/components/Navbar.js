@@ -27,8 +27,6 @@ const Navbar1 = () => {
 
   //here mern navbar fun.
   const { state, dispatch } = useContext(UserContext);
-  console.log(`the navbar user ${state} and ${dispatch}`);
-
   const RenderList = () => {
     if (state) {
       return (
@@ -72,7 +70,6 @@ const Navbar1 = () => {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <RenderList />
           </ul>
-          {/* {button && <Button buttonStyle="btn--outline">Register</Button>} */}
         </div>
       </nav>
     </>

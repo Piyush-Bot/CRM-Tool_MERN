@@ -1,0 +1,20 @@
+.dashboard_wrapper {
+  background-color: rgb(249, 249, 249);
+  padding: 20px;
+  margin-left: 240px;
+}
+.hero_section {
+  margin: 3% 0%;
+}
+.Campaign-chart {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.48);
+}
+
+.Campaign-heading {
+  margin-bottom: 5%;
+  margin-left: 10%;
+}

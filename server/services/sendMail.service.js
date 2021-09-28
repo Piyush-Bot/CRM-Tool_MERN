@@ -216,10 +216,10 @@ const sendEmail = async (email, type) => {
     </style>
 </head>
 <body>
-<table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
+<table className="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
     <tr>
         <td align="center">
-            <table class="email-content" width="100%" cellpadding="0" cellspacing="0" align="center">
+            <table className="email-content" width="100%" cellpadding="0" cellspacing="0" align="center">
                 <!-- Logo -->
                 <tr>
                     <!--                    <td>-->
@@ -229,15 +229,15 @@ const sendEmail = async (email, type) => {
                 </tr>
                 <!-- Email Body -->
                 <tr>
-                    <td class="email-body" width="100%">
-                        <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0">
+                    <td className="email-body" width="100%">
+                        <table className="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0">
                             <!-- Body content -->
                             <tr>
-                                <td class="content-cell">
+                                <td className="content-cell">
                                     <h1>Verify your email address</h1>
                                     <p>Thanks for signing up for Vyb! We're excited to have you as user.</p>
                                     <!-- Action -->
-                                    <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                                    <table className="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td align="center">
                                                 <div>
@@ -246,19 +246,19 @@ const sendEmail = async (email, type) => {
                                                     <w:anchorlock/>
                                                     <center style="color:#ffffff;font-family:sans-serif;font-size:15px;">Verify Email</center>
                                                 </v:roundrect><![endif]-->
-                                                    <a href=${link} class="button button--blue">Verify Email</a>
+                                                    <a href=${link} className="button button--blue">Verify Email</a>
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
                                     <p>Thanks,<br> Vyb Team</p>
                                     <!-- Sub copy -->
-                                    <table class="body-sub">
+                                    <table className="body-sub">
                                         <tr>
                                             <td>
-                                                <p class="sub">If you’re having trouble clicking the button, copy and paste the URL below into your web browser.
+                                                <p className="sub">If you’re having trouble clicking the button, copy and paste the URL below into your web browser.
                                                 </p>
-                                                <p class="sub"><a href=${link}>${link}</a></p>
+                                                <p className="sub"><a href=${link}>${link}</a></p>
                                             </td>
                                         </tr>
                                     </table>
@@ -269,10 +269,10 @@ const sendEmail = async (email, type) => {
                 </tr>
                 <tr>
                     <td>
-                        <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0">
+                        <table className="email-footer" align="center" width="570" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td class="content-cell">
-                                    <p class="sub center">
+                                <td className="content-cell">
+                                    <p className="sub center">
                                        Vyb Lifestyle Private Limited
                                     </p>
                                 </td>

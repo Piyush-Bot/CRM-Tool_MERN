@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="footer-logo">
               <Link to="/" className="social-logo">
                 Scroll labs
-                {/* <i class="zmdi zmdi-camera" /> */}
+                {/* <i className="zmdi zmdi-camera" /> */}
               </Link>
             </div>
             {/* <small className="website-rights">Social Media</small> */}
@@ -63,7 +63,7 @@ const Footer = () => {
                 target="_blank"
                 aria-label="Facebook"
               >
-                <i class="zmdi zmdi-facebook-box" />
+                <i className="zmdi zmdi-facebook-box" />
               </Link>
 
               <Link
@@ -72,7 +72,7 @@ const Footer = () => {
                 target="_blank"
                 aria-label="Instagram"
               >
-                <i class="zmdi zmdi-instagram" />
+                <i className="zmdi zmdi-instagram" />
               </Link>
 
               <Link
@@ -81,7 +81,7 @@ const Footer = () => {
                 target="_blank"
                 aria-label="Twitter"
               >
-                <i class="zmdi zmdi-twitter-box" />
+                <i className="zmdi zmdi-twitter-box" />
               </Link>
 
               <Link
@@ -90,7 +90,7 @@ const Footer = () => {
                 target="blank"
                 aria-label="LinkedIn"
               >
-                <i class="zmdi zmdi-linkedin-box" />
+                <i className="zmdi zmdi-linkedin-box" />
               </Link>
             </div>
           </div>

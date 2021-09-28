@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./css/BDdashboard.css";
-import data from "./search/data.json";
+import "./css/dashboard_bd.css";
+// import data from "./irmTool/data.json";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -229,10 +229,10 @@ export default class BD_Dashboard extends Component {
 
               {/* search here */}
               <div className="search-input">
-                <div class="input-icons">
+                <div className="input-icons">
                   <input
                     type="text"
-                    class="input-field"
+                    className="input-field"
                     placeholder="Search Name"
                     onChange={(e) => this.filterList(e)}
                   />

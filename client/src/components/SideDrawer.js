@@ -1,85 +1,191 @@
-import React from "react";
-import {
-  ListItem,
-  List,
-  ListItemIcon,
-  ListItemText
-} from "@material-ui/core";
-import Drawer from '@mui/material/Drawer';
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core";
+import Drawer from "@material-ui/core/Drawer";
+import Typography from "@material-ui/core/Typography";
+import { useHistory, useLocation } from "react-router-dom";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { withRouter } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import { format } from "date-fns";
+import loginImage from "./images/SC_logo.png";
+import "./css/sidedrawer.css";
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles({
-  drawer: {
-    width: "250px"
-  }
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => {
+  return {
+    page: {
+      background: "#f9f9f9",
+      width: "100%",
+      padding: theme.spacing(3),
+    },
+    root: {
+      display: "flex",
+    },
+    drawer: {
+      width: drawerWidth,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    active: {
+      background: "#f4f4f4",
+    },
+    title: {
+      padding: theme.spacing(1),
+    },
+    appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+    date: {
+      flexGrow: 1,
+    },
+    name: {
+      paddingRight: "20px",
+    },
+
+    icon: {
+      display: "flex",
+      justifyContent: "center",
+    },
+    toolbar: theme.mixins.toolbar,
+  };
 });
 
-const SideDrawer = props => {
-  const { history } = props;
+export default function SideDrawer() {
   const classes = useStyles();
-  const itemsList = [
+  const history = useHistory();
+  const location = useLocation();
+
+  //Get dynamic User name
+  const [userName, setUserName] = useState("");
+  // const [show, setShow] = useState(false);
+  const userNamedata = async () => {
+    try {
+      const res = await fetch("/getData", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      setUserName(data.name);
+      //setShow(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    userNamedata();
+  }, []);
+
+  const menuItems = [
     {
       text: "Dashboard",
       icon: <InboxIcon />,
-      onClick: () => history.push("/dashboard")
+      path: "/dashboard",
     },
     {
       text: "IRM Tool",
       icon: <MailIcon />,
-      onClick: () => history.push("/search")
+      path: "/irmtool",
     },
     {
       text: "Reports",
-      icon: <MailIcon />,
-      onClick: () => history.push("/irmreport")
+      icon: <AddCircleOutlineOutlined />,
+      path: "/irmreport",
     },
     {
       text: "Users",
-      icon: <MailIcon />,
-      onClick: () => history.push("/irmreport")
+      icon: <SubjectOutlined />,
     },
     {
       text: "Products",
       icon: <MailIcon />,
-      onClick: () => history.push("/irmreport")
     },
     {
       text: "Transactions",
       icon: <MailIcon />,
-      onClick: () => history.push("/irmreport")
     },
     {
       text: "Sales",
       icon: <MailIcon />,
-      onClick: () => history.push("/irmreport")
-    }
+    },
   ];
-  return (
-    <Drawer variant="permanent" sx={{
-        width: 250,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: 250,
-          boxSizing: 'border-box',
-        },
-      }}
-      >
-      <List>
-        {itemsList.map((item, index) => {
-          const { text, icon, onClick } = item;
-          return (
-            <ListItem button key={text} onClick={onClick}>
-              {icon && <ListItemIcon>{icon}</ListItemIcon>}
-              <ListItemText primary={text} />
-            </ListItem>
-          );
-        })}
-      </List>
-    </Drawer>
-  );
-};
 
-export default withRouter(SideDrawer);
+  return (
+    <div className={classes.root}>
+      {/* app bar */}
+      <AppBar
+        position="fixed"
+        className={classes.appBar}
+        elevation={0}
+        color="primary"
+      >
+        <Toolbar>
+          <Typography className={classes.date}>
+            Today is the {format(new Date(), "do MMMM Y")}
+          </Typography>
+          <Typography className={classes.name}>{userName}</Typography>
+
+          <Link to="/logout" className="app-links">
+            Logout
+          </Link>
+        </Toolbar>
+      </AppBar>
+
+      {/* side drawer */}
+      <div className="hello">
+        <Drawer
+          className={classes.drawer}
+          variant="permanent"
+          classes={{ paper: classes.drawerPaper }}
+          anchor="left"
+        >
+          <div>
+            <Typography variant="h5" className={classes.title}>
+              <img
+                className={classes.icon}
+                src={loginImage}
+                alt="login logo"
+                width="140"
+                height="80"
+              />
+            </Typography>
+          </div>
+
+          {/* links/list section */}
+          <List>
+            {menuItems.map((item) => (
+              <ListItem
+                button
+                key={item.text}
+                onClick={() => history.push(item.path)}
+                className={
+                  location.pathname == item.path ? classes.active : null
+                }
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+      </div>
+      {/* main content */}
+      {/* <div className={classes.page}></div> */}
+      <div className={classes.toolbar}></div>
+      {/* {children}*/}
+    </div>
+  );
+}
