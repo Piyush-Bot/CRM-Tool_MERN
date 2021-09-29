@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./irmtool.css";
-import data from "./data.json";
+// import data from "./data.json";
 import XLSX from "xlsx";
 import axios from "axios";
 import {
@@ -18,58 +18,20 @@ import {
   TableRow,
   Button,
 } from "@material-ui/core";
-// import SaveIcon from "@mui/icons-material/Save";
-// import SendIcon from "@mui/icons-material/Send";
 
 const headers = ["platform", "category", "genre", "gender", "location"];
 
 const columns = [
-  {
-    id: "platform",
-    label: "Platform",
-    minWidth: 100,
-    align: "center",
-  },
-  { id: "category", label: "Category", minWidth: 100, align: "center" },
-  { id: "genre", label: "Genre", minWidth: 200 },
-  {
-    id: "gender",
-    label: "Gender",
-    minWidth: 100,
-  },
-  {
-    id: "followers",
-    label: "Followers",
-    minWidth: 50,
-  },
-
-  {
-    id: "name",
-    label: "Name",
-    minWidth: 100,
-  },
-
-  {
-    id: "handle",
-    label: "Handle",
-    minWidth: 50,
-    mmaxWidth: 50,
-  },
-  {
-    id: "contact_no",
-    label: "Contact No.",
-    minWidth: 100,
-  },
-  {
-    id: "location",
-    label: "Location",
-    minWidth: 100,
-  },
-  {
-    id: "email",
-    label: "Email",
-    minWidth: 50,
-  },
+  { id: "platform", label: "Platform", minWidth: 50, align: "center" },
+  { id: "category", label: "Category", minWidth: 50, align: "center" },
+  { id: "genre", label: "Genre", minWidth: 150 },
+  { id: "name", label: "Name", minWidth: 150 },
+  { id: "gender", label: "Gender", minWidth: 50 },
+  { id: "followers", label: "Followers", minWidth: 50 },
+  { id: "location", label: "Location", minWidth: 100 },
+  { id: "handle", label: "Handle", minWidth: 50 },
+  { id: "contact_no", label: "Contact No.", minWidth: 100 },
+  { id: "email", label: "Email", maxWidth: 50 },
 ];
 
 export default class Search extends Component {
@@ -78,7 +40,7 @@ export default class Search extends Component {
     this.state = {
       selectedOption: [],
       filterOption: [],
-      filteredData: data,
+      filteredData: [],
       page: 0,
       rowsPerPage: 10,
       data: [],
@@ -195,7 +157,11 @@ export default class Search extends Component {
     updateList = updateList.filter((item) => {
       return (
         item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1 ||
-        item.gender.toLowerCase().search(e.target.value.toLowerCase()) !== -1 ||
+        item.location.toLowerCase().search(e.target.value.toLowerCase()) !==
+          -1 ||
+        item.genre.toLowerCase().search(e.target.value.toLowerCase()) !== -1 ||
+        item.platform.toLowerCase().search(e.target.value.toLowerCase()) !==
+          -1 ||
         item.followers.toLowerCase().search(e.target.value.toLowerCase()) !== -1
       );
       /* let keys = Object.keys(item);
@@ -289,7 +255,7 @@ export default class Search extends Component {
                 </div>
 
                 {/* search here */}
-                <div className="search-input">
+                <div className="search-irm">
                   <div className="input-icons">
                     <input
                       type="text"
@@ -347,7 +313,6 @@ export default class Search extends Component {
                             <TableCell
                               key={column.id}
                               align={column.align}
-                              className="table_header"
                               style={{ minWidth: column.minWidth }}
                             >
                               {column.label}

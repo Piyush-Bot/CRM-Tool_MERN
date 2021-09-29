@@ -10,8 +10,9 @@ import ErrorPage from "./components/Errorpage";
 import Dashboard from "./components/Dashboard";
 import Tool from "./components/irmtool/Tool";
 import Report from "./components/Report";
-// import DashboardBd from "./components/DashboardBd";
-import SideDrawer from "./components/SideDrawer";
+import LayoutBd from "./components/LayoutBd";
+import DashboardBd from "./components/DashboardBd";
+import LayoutIrm from "./components/LayoutIrm";
 import Logout from "./components/Logout";
 import { initialState, reducer } from "./components/reducer/UseReducer";
 import Footer from "./components/Footer";
@@ -41,30 +42,28 @@ const Routing = () => {
           <Footer />
         </Route>
 
-        {/* <Route path="/dashboardbd">
+        <Route path="/dashboardbd">
+          <LayoutBd />
           <DashboardBd />
-        </Route> */}
-
-        <Route path="/irmreport">
-          <SideDrawer />
-          <Report />
         </Route>
 
         <Route path="/dashboard">
-          <SideDrawer />
+          <LayoutIrm />
           <Dashboard />
         </Route>
+
         <Route path="/irmtool">
-          <SideDrawer />
+          <LayoutIrm />
           <Tool />
+        </Route>
+
+        <Route path="/irmreport">
+          <LayoutIrm />
+          <Report />
         </Route>
 
         <Route path="/logout">
           <Logout />
-        </Route>
-
-        <Route path="/register">
-          <Signup />
         </Route>
 
         <Route>

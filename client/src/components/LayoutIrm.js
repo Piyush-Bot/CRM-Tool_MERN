@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
-import Drawer from "@material-ui/core/Drawer";
-import Typography from "@material-ui/core/Typography";
 import { useHistory, useLocation } from "react-router-dom";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons";
+import { AddCircleOutlineOutlined } from "@material-ui/icons";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import {
+  makeStyles,
+  Toolbar,
+  AppBar,
+  ListItemText,
+  ListItemIcon,
+  ListItem,
+  List,
+  Typography,
+  Drawer,
+} from "@material-ui/core";
 import { format } from "date-fns";
-import loginImage from "./images/SC_logo.png";
+import logoImage from "./images/SC_logo.png";
 import "./css/sidedrawer.css";
 import { Link } from "react-router-dom";
 
@@ -21,41 +23,15 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => {
   return {
-    page: {
-      background: "#f9f9f9",
-      width: "100%",
-      padding: theme.spacing(3),
-    },
-    root: {
-      display: "flex",
-    },
-    drawer: {
-      width: drawerWidth,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    active: {
-      background: "#f4f4f4",
-    },
-    title: {
-      padding: theme.spacing(1),
-    },
-    appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-    date: {
-      flexGrow: 1,
-    },
-    name: {
-      paddingRight: "20px",
-    },
-
-    icon: {
-      display: "flex",
-      justifyContent: "center",
-    },
+    page: { background: "#f9f9f9", width: "100%", padding: theme.spacing(3) },
+    root: { display: "flex" },
+    drawer: { width: drawerWidth },
+    drawerPaper: { width: drawerWidth },
+    active: { background: "#f4f4f4" },
+    icon: { margin: "10px", paddingLeft: "40px" },
+    appBar: { width: `calc(100% - ${drawerWidth}px)`, marginLeft: drawerWidth },
+    date: { flexGrow: 1 },
+    name: { paddingRight: "20px" },
     toolbar: theme.mixins.toolbar,
   };
 });
@@ -76,7 +52,6 @@ export default function SideDrawer() {
           "Content-Type": "application/json",
         },
       });
-
       const data = await res.json();
       setUserName(data.name);
       //setShow(true);
@@ -90,37 +65,13 @@ export default function SideDrawer() {
   }, []);
 
   const menuItems = [
-    {
-      text: "Dashboard",
-      icon: <InboxIcon />,
-      path: "/dashboard",
-    },
-    {
-      text: "IRM Tool",
-      icon: <MailIcon />,
-      path: "/irmtool",
-    },
-    {
-      text: "Reports",
-      icon: <AddCircleOutlineOutlined />,
-      path: "/irmreport",
-    },
-    {
-      text: "Users",
-      icon: <SubjectOutlined />,
-    },
-    {
-      text: "Products",
-      icon: <MailIcon />,
-    },
-    {
-      text: "Transactions",
-      icon: <MailIcon />,
-    },
-    {
-      text: "Sales",
-      icon: <MailIcon />,
-    },
+    { text: "Dashboard", icon: <InboxIcon />, path: "/dashboard" },
+    { text: "IRM Tool", icon: <MailIcon />, path: "/irmtool" },
+    { text: "Reports", icon: <AddCircleOutlineOutlined />, path: "/irmreport" },
+    // { text: "Users", icon: <SubjectOutlined /> },
+    // { text: "Products", icon: <MailIcon /> },
+    // { text: "Transactions", icon: <MailIcon /> },
+    // { text: "Sales", icon: <MailIcon /> },
   ];
 
   return (
@@ -153,14 +104,8 @@ export default function SideDrawer() {
           anchor="left"
         >
           <div>
-            <Typography variant="h5" className={classes.title}>
-              <img
-                className={classes.icon}
-                src={loginImage}
-                alt="login logo"
-                width="140"
-                height="80"
-              />
+            <Typography className={classes.icon}>
+              <img src={logoImage} alt="login logo" width="120" height="80" />
             </Typography>
           </div>
 
