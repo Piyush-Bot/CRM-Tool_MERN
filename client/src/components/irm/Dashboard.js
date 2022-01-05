@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import FeaturedInfo from "./dashboard/campaign/Campinfo";
-import Map from "./dashboard/map/Map";
-import Chart from "./dashboard/chart/chart";
-import "./css/dashboard.css";
-
+import FeaturedInfo from "./dashboard/Campinfo";
+import Map from "./dashboard/Map";
+import Chart from "./dashboard/chart";
+import "./dashboard.css";
 const Dashboard = () => {
   const [setUserName] = useState("");
   // const [show, setShow] = useState(false);
@@ -36,14 +35,12 @@ const Dashboard = () => {
         <div className="row">
           <h4>DASHBOARD</h4>
           <hr />
-
           <div className="hero_section">
             <div className="row">
               <div className="col-md-6">
                 <h2>Campaign</h2>
                 <FeaturedInfo />
               </div>
-
               <div className="col-md-6">
                 <div className="Map-chart">
                   <Map />
@@ -52,7 +49,6 @@ const Dashboard = () => {
             </div>
           </div>
           <hr />
-
           <div className="row">
             <div className="col-md-8">
               <div className="Campaign-chart">
@@ -62,7 +58,6 @@ const Dashboard = () => {
             </div>
             <div className="col-md-4">
               <h2> Empty </h2>
-
               <hr />
             </div>
           </div>

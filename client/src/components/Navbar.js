@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./css/Navbar.css";
 import { UserContext } from "../App";
 
-const Navbar1 = () => {
+const Navbar = () => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -76,4 +76,4 @@ const Navbar1 = () => {
   );
 };
 
-export default Navbar1;
+export default Navbar;

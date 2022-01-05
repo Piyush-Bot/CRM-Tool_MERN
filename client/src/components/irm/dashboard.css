@@ -1,7 +1,7 @@
 .dashboard_wrapper {
   background-color: rgb(249, 249, 249);
-  padding: 20px;
-  margin-left: 240px;
+  margin: 65px 0px 0px;
+  padding: 10px 50px;
 }
 .hero_section {
   margin: 3% 0%;
@@ -17,4 +17,10 @@
 .Campaign-heading {
   margin-bottom: 5%;
   margin-left: 10%;
+}
+
+.MuiListItemIcon-root {
+  color: rgb(255, 255, 255) !important;
+
+  min-width: 30px !important;
 }

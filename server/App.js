@@ -5,7 +5,6 @@ const app = express();
 
 dotenv.config({ path: "./config.env" });
 require("./db/conn");
-// const User = require('./model/userSchema');
 
 app.use(express.json());
 // link of router

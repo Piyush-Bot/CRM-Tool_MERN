@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./irmtool.css";
-// import data from "./data.json";
+import "./dashboard_bd.css";
 import XLSX from "xlsx";
 import axios from "axios";
 import {
@@ -22,16 +21,14 @@ import {
 const headers = ["platform", "category", "genre", "gender", "location"];
 
 const columns = [
-  { id: "platform", label: "Platform", minWidth: 50, align: "center" },
-  { id: "category", label: "Category", minWidth: 50, align: "center" },
-  { id: "genre", label: "Genre", minWidth: 150 },
-  { id: "name", label: "Name", minWidth: 150 },
-  { id: "gender", label: "Gender", minWidth: 50 },
+  { id: "platform", label: "Platform", minWidth: 100, align: "center" },
+  { id: "category", label: "Category", minWidth: 100, align: "center" },
+  { id: "genre", label: "Genre", minWidth: 200 },
+  { id: "name", label: "Name", minWidth: 100 },
   { id: "followers", label: "Followers", minWidth: 50 },
+  { id: "gender", label: "Gender", minWidth: 100 },
+  { id: "handle", label: "Handle", minWidth: 50, mmaxWidth: 50 },
   { id: "location", label: "Location", minWidth: 100 },
-  { id: "handle", label: "Handle", minWidth: 50 },
-  { id: "contact_no", label: "Contact No.", minWidth: 100 },
-  { id: "email", label: "Email", maxWidth: 50 },
 ];
 
 export default class Search extends Component {
@@ -164,17 +161,6 @@ export default class Search extends Component {
           -1 ||
         item.followers.toLowerCase().search(e.target.value.toLowerCase()) !== -1
       );
-      /* let keys = Object.keys(item);
-      for (let i = 0; i < keys.length; i++) {
-        if (
-          item[keys[i]] &&
-          typeof item[keys[i]] != "number" &&
-          item[keys[i]].toLowerCase().search(e.target.value.toLowerCase()) !==
-            -1
-        ) {
-          return item[keys[i]].toLowerCase();
-        }
-      } */
     });
 
     this.setState((prev) => {
@@ -222,20 +208,16 @@ export default class Search extends Component {
     };
 
     //viewpart
+
     let { filterOption, filteredData } = this.state;
     return (
       <>
-        <div className="search__wrapper">
-          <div className="tool-container">
-            <section className="tool_area">
-              <p className="tool_area_heading">
-                <h1>Influencer List</h1>
-                <small>Use Filters</small>
-              </p>
-
+        <div className="dashboardbd_wrapper">
+          <div className="filter-container">
+            <section className="filter-subscription">
               {/* filters through select */}
-              <div className="tool-input-areas">
-                <div className="tool-input">
+              <div className="filter-input-areas">
+                <div className="filter-input">
                   <span id="basic-addon1">Filter By:-</span>
                   <Select
                     placeholder="Username"
@@ -255,7 +237,7 @@ export default class Search extends Component {
                 </div>
 
                 {/* search here */}
-                <div className="search-irm">
+                <div className="search-input">
                   <div className="input-icons">
                     <input
                       type="text"
@@ -266,9 +248,8 @@ export default class Search extends Component {
                     <i className="fa fa-search icon"></i>
                   </div>
                 </div>
-
                 {/* download button */}
-                <div className="download-input">
+                <div className="download">
                   <Button
                     onClick={this.downloadExcel}
                     variant="contained"
@@ -279,156 +260,82 @@ export default class Search extends Component {
                 </div>
               </div>
             </section>
-            {/* <div className="custom-shape-divider-bottom-1631877305">
-            <svg
-              data-name="Layer 1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                className="shape-fill"
-              ></path>
-            </svg>
-          </div> */}
           </div>
 
           {/* table shown */}
 
-          <div className=" main-table-area row">
-            <div className="col-md-1"></div>
-            <div className="col-md-10">
-              <div className="table-container">
-                <Paper className="paperroot">
-                  <TableContainer className="papercontainer">
-                    <Table
-                      title="Influencer Table1"
-                      stickyHeader
-                      aria-label="sticky table"
-                    >
-                      <TableHead>
-                        <TableRow title="Heading Row">
-                          {columns.map((column) => (
-                            <TableCell
-                              key={column.id}
-                              align={column.align}
-                              style={{ minWidth: column.minWidth }}
+          <div className=" main-table-container ">
+            <div className="table-container">
+              <Paper className="paperroot">
+                <TableContainer className="papercontainer">
+                  <Table
+                    title="Influencer Table1"
+                    stickyHeader
+                    aria-label="sticky table"
+                  >
+                    <TableHead>
+                      <TableRow title="Heading Row">
+                        {columns.map((column) => (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.filteredData
+                        .slice(
+                          this.state.page * this.state.rowsPerPage,
+                          this.state.page * this.state.rowsPerPage +
+                            this.state.rowsPerPage
+                        )
+                        .map((row) => {
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.Name}
+                              title="Body Row"
                             >
-                              {column.label}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {this.state.filteredData
-                          .slice(
-                            this.state.page * this.state.rowsPerPage,
-                            this.state.page * this.state.rowsPerPage +
-                              this.state.rowsPerPage
-                          )
-                          .map((row) => {
-                            return (
-                              <TableRow
-                                hover
-                                role="checkbox"
-                                tabIndex={-1}
-                                key={row.Name}
-                                title="Body Row"
-                              >
-                                {columns.map((column) => {
-                                  const value = row[column.id];
-                                  return (
-                                    <TableCell
-                                      key={column.id}
-                                      align={column.align}
-                                    >
-                                      {column.format &&
-                                      typeof value === "number"
-                                        ? column.format(value)
-                                        : value}
-                                    </TableCell>
-                                  );
-                                })}
-                              </TableRow>
-                            );
-                          })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                  <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={this.state.data.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    onPageChange={(e, n) => this.handleChangePage(e, n)}
-                    onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
-                  />
-                </Paper>
-                {filteredData.length === 0 ? <p>no result found</p> : null}
-              </div>
+                              {columns.map((column) => {
+                                const value = row[column.id];
+                                return (
+                                  <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                  >
+                                    {column.format && typeof value === "number"
+                                      ? column.format(value)
+                                      : value}
+                                  </TableCell>
+                                );
+                              })}
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[10, 25, 100]}
+                  component="div"
+                  count={this.state.data.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  onPageChange={(e, n) => this.handleChangePage(e, n)}
+                  onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
+                />
+              </Paper>
+              {filteredData.length === 0 ? <p>no result found</p> : null}
             </div>
           </div>
         </div>
       </>
     );
   }
-}
-
-{
-  /* 
-import React, { Component } from 'react';
-import { CSVLink } from "react-csv";
- 
-const headers = [
-  { label: "Name", key: "name" },
-  { label: "Username", key: "username" },
-  { label: "Email", key: "email" },
-  { label: "Phone", key: "phone" },
-  { label: "Website", key: "website" }
-];
- 
-className AsyncCSV extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: []
-    }
-    this.csvLinkEl = React.createRef();
-  }
- 
-  getUserList = () => {
-    return fetch('https://jsonplaceholder.typicode.com/users')
-      .then(res => res.json());
-  }
- 
-  downloadReport = async () => {
-    const data = await this.getUserList();
-    this.setState({ data: data }, () => {
-      setTimeout(() => {
-        this.csvLinkEl.current.link.click();
-      });
-    });
-  }
- 
-  render() {
-    const { data } = this.state;
- 
-    return (
-      <div>
-        <input type="button" value="Export to CSV (Async)"  onClick={this.downloadReport} />
-        <CSVLink
-          headers={headers}
-          filename="Clue_Mediator_Report_Async.csv"
-          data={data}
-          ref={this.csvLinkEl}
-        />
-      </div>
-    );
-  }
-}
- 
-export default AsyncCSV;
- */
 }

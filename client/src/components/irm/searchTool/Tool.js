@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./css/dashboard_bd.css";
-// import data from "./irmtool/data.json";
+import "./irmtool.css";
 import XLSX from "xlsx";
 import axios from "axios";
 import {
@@ -22,14 +21,16 @@ import {
 const headers = ["platform", "category", "genre", "gender", "location"];
 
 const columns = [
-  { id: "platform", label: "Platform", minWidth: 100, align: "center" },
-  { id: "category", label: "Category", minWidth: 100, align: "center" },
-  { id: "genre", label: "Genre", minWidth: 200 },
-  { id: "name", label: "Name", minWidth: 100 },
+  { id: "platform", label: "Platform", minWidth: 50, align: "center" },
+  { id: "category", label: "Category", minWidth: 50, align: "center" },
+  { id: "genre", label: "Genre", minWidth: 150 },
+  { id: "name", label: "Name", minWidth: 150 },
+  { id: "gender", label: "Gender", minWidth: 50 },
   { id: "followers", label: "Followers", minWidth: 50 },
-  { id: "gender", label: "Gender", minWidth: 100 },
-  { id: "handle", label: "Handle", minWidth: 50, mmaxWidth: 50 },
   { id: "location", label: "Location", minWidth: 100 },
+  { id: "handle", label: "Handle", minWidth: 50 },
+  { id: "contact_no", label: "Contact No.", minWidth: 100 },
+  { id: "email", label: "Email", maxWidth: 50 },
 ];
 
 export default class Search extends Component {
@@ -162,6 +163,17 @@ export default class Search extends Component {
           -1 ||
         item.followers.toLowerCase().search(e.target.value.toLowerCase()) !== -1
       );
+      /* let keys = Object.keys(item);
+      for (let i = 0; i < keys.length; i++) {
+        if (
+          item[keys[i]] &&
+          typeof item[keys[i]] != "number" &&
+          item[keys[i]].toLowerCase().search(e.target.value.toLowerCase()) !==
+            -1
+        ) {
+          return item[keys[i]].toLowerCase();
+        }
+      } */
     });
 
     this.setState((prev) => {
@@ -212,16 +224,12 @@ export default class Search extends Component {
     let { filterOption, filteredData } = this.state;
     return (
       <>
-        <div className="dashboardbd_wrapper">
-          <div className="filter-container">
-            <section className="filter-subscription">
-              <p className="filter-subscription-heading">
-                <h1>BD_Dashboard</h1>
-              </p>
-
+        <div className="search__wrapper">
+          <div className="tool-container">
+            <section className="tool_area">
               {/* filters through select */}
-              <div className="filter-input-areas">
-                <div className="filter-input">
+              <div className="tool-input-areas">
+                <div className="tool-input">
                   <span id="basic-addon1">Filter By:-</span>
                   <Select
                     placeholder="Username"
@@ -241,7 +249,7 @@ export default class Search extends Component {
                 </div>
 
                 {/* search here */}
-                <div className="search-input">
+                <div className="search-irm">
                   <div className="input-icons">
                     <input
                       type="text"
@@ -252,6 +260,7 @@ export default class Search extends Component {
                     <i className="fa fa-search icon"></i>
                   </div>
                 </div>
+
                 {/* download button */}
                 <div className="download-input">
                   <Button
@@ -268,78 +277,139 @@ export default class Search extends Component {
 
           {/* table shown */}
 
-          <div className=" main-table-container ">
-            <div className="table-container">
-              <Paper className="paperroot">
-                <TableContainer className="papercontainer">
-                  <Table
-                    title="Influencer Table1"
-                    stickyHeader
-                    aria-label="sticky table"
-                  >
-                    <TableHead>
-                      <TableRow title="Heading Row">
-                        {columns.map((column) => (
-                          <TableCell
-                            key={column.id}
-                            align={column.align}
-                            style={{ minWidth: column.minWidth }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.filteredData
-                        .slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                        .map((row) => {
-                          return (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.Name}
-                              title="Body Row"
+          <div className=" main-table-area row">
+            <div className="col-md-1"></div>
+            <div className="col-md-10">
+              <div className="table-container">
+                <Paper className="paperroot">
+                  <TableContainer className="papercontainer">
+                    <Table
+                      title="Influencer Table1"
+                      stickyHeader
+                      aria-label="sticky table"
+                    >
+                      <TableHead>
+                        <TableRow title="Heading Row">
+                          {columns.map((column) => (
+                            <TableCell
+                              key={column.id}
+                              align={column.align}
+                              style={{ minWidth: column.minWidth }}
                             >
-                              {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                  <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                  >
-                                    {column.format && typeof value === "number"
-                                      ? column.format(value)
-                                      : value}
-                                  </TableCell>
-                                );
-                              })}
-                            </TableRow>
-                          );
-                        })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                <TablePagination
-                  rowsPerPageOptions={[10, 25, 100]}
-                  component="div"
-                  count={this.state.data.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={(e, n) => this.handleChangePage(e, n)}
-                  onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
-                />
-              </Paper>
-              {filteredData.length === 0 ? <p>no result found</p> : null}
+                              {column.label}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.filteredData
+                          .slice(
+                            this.state.page * this.state.rowsPerPage,
+                            this.state.page * this.state.rowsPerPage +
+                              this.state.rowsPerPage
+                          )
+                          .map((row) => {
+                            return (
+                              <TableRow
+                                hover
+                                role="checkbox"
+                                tabIndex={-1}
+                                key={row.Name}
+                                title="Body Row"
+                              >
+                                {columns.map((column) => {
+                                  const value = row[column.id];
+                                  return (
+                                    <TableCell
+                                      key={column.id}
+                                      align={column.align}
+                                    >
+                                      {column.format &&
+                                      typeof value === "number"
+                                        ? column.format(value)
+                                        : value}
+                                    </TableCell>
+                                  );
+                                })}
+                              </TableRow>
+                            );
+                          })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                  <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={this.state.data.length}
+                    rowsPerPage={this.state.rowsPerPage}
+                    page={this.state.page}
+                    onPageChange={(e, n) => this.handleChangePage(e, n)}
+                    onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
+                  />
+                </Paper>
+                {filteredData.length === 0 ? <p>no result found</p> : null}
+              </div>
             </div>
           </div>
         </div>
       </>
     );
   }
+}
+
+{
+  /* 
+import React, { Component } from 'react';
+import { CSVLink } from "react-csv";
+ 
+const headers = [
+  { label: "Name", key: "name" },
+  { label: "Username", key: "username" },
+  { label: "Email", key: "email" },
+  { label: "Phone", key: "phone" },
+  { label: "Website", key: "website" }
+];
+ 
+className AsyncCSV extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    }
+    this.csvLinkEl = React.createRef();
+  }
+ 
+  getUserList = () => {
+    return fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json());
+  }
+ 
+  downloadReport = async () => {
+    const data = await this.getUserList();
+    this.setState({ data: data }, () => {
+      setTimeout(() => {
+        this.csvLinkEl.current.link.click();
+      });
+    });
+  }
+ 
+  render() {
+    const { data } = this.state;
+ 
+    return (
+      <div>
+        <input type="button" value="Export to CSV (Async)"  onClick={this.downloadReport} />
+        <CSVLink
+          headers={headers}
+          filename="Clue_Mediator_Report_Async.csv"
+          data={data}
+          ref={this.csvLinkEl}
+        />
+      </div>
+    );
+  }
+}
+ 
+export default AsyncCSV;
+ */
 }
