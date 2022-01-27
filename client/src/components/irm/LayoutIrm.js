@@ -1,13 +1,13 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import SidebarIrm from "./irm/SidebarIrm";
-import Dashboard from "./irm/Dashboard";
-import AppbarIrm from "./irm/AppbarIrm";
-import Report from "./irm/Report";
-import InvoiceGenerator from "./irm/purchaseOrder/InvoiceGenerator";
-import InvoiceTemplate from "./irm/purchaseOrder/InvoiceTemplate";
-import Tool from "./irm/searchTool/Tool";
-import Footer from "./Footer";
+import SidebarIrm from "./SidebarIrm";
+import Dashboard from "./Dashboard";
+import AppbarIrm from "./AppbarIrm";
+import Report from "./Report";
+import InvoiceGenerator from "./purchaseOrder/InvoiceGenerator";
+import InvoiceTemplate from "./purchaseOrder/InvoiceTemplate";
+import Tool from "./Tool";
+import Footer from "../Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 const LayoutIrm = () => {
@@ -15,10 +15,10 @@ const LayoutIrm = () => {
     <>
       <AppbarIrm />
       <Grid container>
-        <Grid item sm={2} xs={2}>
+        <Grid item xs={2} sm={2}>
           <SidebarIrm />
         </Grid>
-        <Grid item sm={10} xs={10}>
+        <Grid item xs={10} sm={10}>
           <Routes>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="invoicegen" element={<InvoiceGenerator />} />

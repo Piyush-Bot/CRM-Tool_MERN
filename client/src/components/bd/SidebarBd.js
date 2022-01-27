@@ -10,14 +10,13 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import { useNavigate, useLocation } from "react-router-dom";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import CasesSharpIcon from "@mui/icons-material/CasesSharp";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
     color: "white",
-    backgroundColor: "#2d2d2d",
+    backgroundColor: "#495159",
     position: "sticky",
     top: 0,
     padding: "73px 5px",
@@ -39,13 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const menuItems = [
-  { text: "Dashboard", icon: <InboxIcon />, path: "/layoutbd/dashboardbd" },
-  { text: "Employee", icon: <InboxIcon />, path: "/layoutbd/employee" },
-  {
-    text: "EmployeeForm",
-    icon: <InboxIcon />,
-    path: "/layoutbd/employeeformedit",
-  },
+  { text: "Influencer", icon: <InboxIcon />, path: "/layoutbd/dashboardbd" },
 ];
 
 const SidebarBd = () => {

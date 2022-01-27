@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Toolbar, AppBar, Badge, Typography } from "@material-ui/core";
+import { Toolbar, AppBar, Avatar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
-import { Mail, Notifications } from "@material-ui/icons";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import logo from "../images/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -20,18 +21,24 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     // [theme.breakpoints.up("sm")]: { display: "none" },
   },
-  icons: {
-    alignItems: "center",
-    display: (props) => (props.open ? "none" : "flex"),
-  },
-  badge: {
+  logo: {
     marginRight: "20px",
+    display: "block",
   },
+
+  // icons: {
+  //   alignItems: "center",
+  //   display: (props) => (props.open ? "none" : "flex"),
+  // },
+  // badge: {
+  //   marginRight: "20px",
+  // },
   name: { paddingRight: "20px" },
 }));
 
 const AppbarHr = () => {
   const classes = useStyles();
+  let navigate = useNavigate();
   //Get dynamic User name
   const [userName, setUserName] = useState("");
   //const [show, setShow] = useState(false);
@@ -56,29 +63,39 @@ const AppbarHr = () => {
     userNamedata();
   }, []);
 
+  const logout = () => {
+    axios
+      .get("/logout")
+      .then(function (response) {
+        navigate("/login");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <AppBar position="fixed" elevation={3} color="primary">
         <Toolbar className={classes.toolbar}>
+          <Avatar className={classes.logo} src={logo} />
           <Typography className={classes.logoLg}>
             {format(new Date(), "do MMMM Y")}
           </Typography>
           <Typography className={classes.logoSm}>
             {format(new Date(), "do MMMM Y")}
           </Typography>
-          <div className={classes.icons}>
+          {/*<div className={classes.icons}>
             <Badge badgeContent={4} color="secondary" className={classes.badge}>
               <Mail />
             </Badge>
             <Badge badgeContent={2} color="secondary" className={classes.badge}>
               <Notifications />
             </Badge>
-            {/* <Avatar src={logo} /> */}
-          </div>
+             <Avatar src={logo} /> 
+          </div>*/}
           <Typography className={classes.name}>{userName}</Typography>
-          <Link to="/logout" className="app-links">
-            Logout
-          </Link>
+          <span onClick={logout}>Logout</span>
         </Toolbar>
       </AppBar>
     </>

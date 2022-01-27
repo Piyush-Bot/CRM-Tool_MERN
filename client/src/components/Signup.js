@@ -1,5 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import {
   Avatar,
   Button,
@@ -18,11 +25,20 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
+
 const theme = createTheme();
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const Signup = () => {
-  const [userType, setuserType] = React.useState("user");
-  const history = useNavigate();
+  let navigate = useNavigate();
+  const [userType, setuserType] = useState("user");
+  const [showPassword, setshowPassword] = useState(false);
+  const [openSnackbar, setopenSnackbar] = useState(false);
+  const [message, setMessage] = useState("");
+  const [timerOutRef, setTimerOutRef] = useState(null);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -30,7 +46,7 @@ const Signup = () => {
     work: "",
     password: "",
     cpassword: "",
-    type: "user",
+    type: "emp",
   });
 
   let name, value;
@@ -46,36 +62,43 @@ const Signup = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const PostData = async (e) => {
-    e.preventDefault();
-    const { name, email, phone, work, password, cpassword, type } = user;
-    console.log(user);
-    const res = await fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        work,
-        password,
-        cpassword,
-        type,
-      }),
-    });
+  useEffect(() => {
+    return () => clearTimeout(timerOutRef);
+  }, []);
 
-    const data = await res.json();
-    // I need to change the data to res
-    if (data.status === 422 || !data) {
-      window.alert("INvalid Registration");
-      console.log("INvalid Registration");
-    } else {
-      window.alert(" Registration Successfull");
-      console.log("Successfull Registration");
-      history("/login");
-    }
+  const PostData = (e) => {
+    e.preventDefault();
+    axios
+      .post("/register", {
+        ...user,
+      })
+      .then(function (response) {
+        setopenSnackbar(true);
+        setMessage(response.data.message);
+        const timerOutRef = setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+        setTimerOutRef(timerOutRef);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  //show password functions
+  const handleClickShowPassword = () => {
+    setshowPassword(!showPassword);
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  //code for handling snackbar
+  const handleClick = () => {
+    setopenSnackbar(true);
+  };
+  const handleClose = () => {
+    setopenSnackbar(false);
   };
 
   return (
@@ -112,7 +135,7 @@ const Signup = () => {
             <Typography gutterBottom component="h1" variant="h5">
               Sign Up
             </Typography>
-            <Box method="POST">
+            <Box>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -126,7 +149,6 @@ const Signup = () => {
                     autoFocus
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -167,9 +189,25 @@ const Signup = () => {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     value={user.password}
                     onChange={handleInputs}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {showPassword ? (
+                              <VisibilityIcon />
+                            ) : (
+                              <VisibilityOffIcon />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -178,15 +216,31 @@ const Signup = () => {
                     fullWidth
                     name="cpassword"
                     label="Cpassword"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     value={user.cpassword}
                     onChange={handleInputs}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {showPassword ? (
+                              <VisibilityIcon />
+                            ) : (
+                              <VisibilityOffIcon />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
               </Grid>
 
               <FormControl component="fieldset">
-                <FormLabel component="legend">Type</FormLabel>
+                <FormLabel component="legend">Role_Type</FormLabel>
                 <RadioGroup
                   row
                   aria-label="type"
@@ -195,14 +249,16 @@ const Signup = () => {
                   onChange={handleInputs}
                 >
                   <FormControlLabel
-                    value="admin"
+                    value="irm"
                     control={<Radio />}
-                    label="Admin"
+                    label="IRM"
                   />
+                  <FormControlLabel value="bd" control={<Radio />} label="BD" />
+                  <FormControlLabel value="hr" control={<Radio />} label="HR" />
                   <FormControlLabel
-                    value="user"
+                    value="emp"
                     control={<Radio />}
-                    label="User"
+                    label="EMP"
                   />
                 </RadioGroup>
               </FormControl>
@@ -216,7 +272,7 @@ const Signup = () => {
                 onClick={PostData}
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Submit
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
@@ -228,224 +284,23 @@ const Signup = () => {
             </Box>
           </Box>
         </Grid>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert
+            onClose={handleClose}
+            severity={
+              message.includes("Registration Successful") ? "success" : "error"
+            }
+            sx={{ width: "100%" }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>
       </Grid>
     </ThemeProvider>
   );
 };
 export default Signup;
-
-// import React, { useState } from "react";
-// import { /* NavLink, */ useNavigate } from "react-router-dom";
-// // import signpic from "./images/signup.svg";
-// import "./css/Login.css";
-
-// import Radio from "@material-ui/core/Radio";
-// import RadioGroup from "@material-ui/core/RadioGroup";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import FormControl from "@material-ui/core/FormControl";
-// import FormLabel from "@material-ui/core/FormLabel";
-
-// const Signup = () => {
-//   const [userType, setuserType] = React.useState("user");
-//   const history = useNavigate();
-//   const [user, setUser] = useState({
-//     name: "",
-//     email: "",
-//     phone: "",
-//     work: "",
-//     password: "",
-//     cpassword: "",
-//     type: "user",
-//   });
-
-//   let name, value;
-
-//   const handleInputs = (e) => {
-//     console.log(e);
-//     name = e.target.name;
-//     value = e.target.value;
-//     console.log(name, value);
-//     if (e.target.name === "type") {
-//       setuserType(e.target.value);
-//     }
-//     setUser({ ...user, [name]: value });
-//   };
-
-//   const PostData = async (e) => {
-//     e.preventDefault();
-
-//     const { name, email, phone, work, password, cpassword, type } = user;
-//     console.log(user);
-//     const res = await fetch("/register", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         name,
-//         email,
-//         phone,
-//         work,
-//         password,
-//         cpassword,
-//         type,
-//       }),
-//     });
-
-//     const data = await res.json();
-
-//     // I need to change the data to res
-//     if (data.status === 422 || !data) {
-//       window.alert("INvalid Registration");
-//       console.log("INvalid Registration");
-//     } else {
-//       window.alert(" Registration Successfull");
-//       console.log("Successfull Registration");
-
-//       history("/login");
-//     }
-//   };
-
-//   return (
-//     <>
-//       <section className="signup">
-//         <div className="container mt-5">
-//           <div className="signup-content">
-//             <div className="signup-form">
-//               <h2 className="form-title">Sign Up</h2>
-//               <form method="POST" className="register-form" id="register-form">
-//                 <div className="form-group">
-//                   <label htmlFor="name"></label>
-//                   <input
-//                     className="form-control"
-//                     type="text"
-//                     name="name"
-//                     id="name"
-//                     autoComplete="off"
-//                     value={user.name}
-//                     onChange={handleInputs}
-//                     placeholder="Your Name"
-//                   />
-//                 </div>
-//                 <div className="form-group">
-//                   <label htmlFor="email">
-//                     <i className="zmdi zmdi-email material-icons-name"></i>
-//                   </label>
-//                   <input
-//                     className="form-control"
-//                     type="email"
-//                     name="email"
-//                     id="email"
-//                     autoComplete="off"
-//                     value={user.email}
-//                     onChange={handleInputs}
-//                     placeholder="Your Email"
-//                   />
-//                 </div>
-//                 <div className="form-group">
-//                   <label htmlFor="phone">
-//                     <i className="zmdi zmdi-phone-in-talk material-icons-name"></i>
-//                   </label>
-//                   <input
-//                     type="number"
-//                     name="phone"
-//                     id="phone"
-//                     autoComplete="off"
-//                     value={user.phone}
-//                     onChange={handleInputs}
-//                     placeholder="Your Phone"
-//                   />
-//                 </div>
-//                 <div className="form-group">
-//                   <label htmlFor="work">
-//                     <i className="zmdi zmdi-slideshow material-icons-name"></i>
-//                   </label>
-//                   <input
-//                     type="text"
-//                     name="work"
-//                     id="work"
-//                     autoComplete="off"
-//                     value={user.work}
-//                     onChange={handleInputs}
-//                     placeholder="Your Profession"
-//                   />
-//                 </div>
-//                 <div className="form-group">
-//                   <label htmlFor="password">
-//                     <i className="zmdi zmdi-lock material-icons-name"></i>
-//                   </label>
-//                   <input
-//                     type="password"
-//                     name="password"
-//                     id="password"
-//                     autoComplete="off"
-//                     value={user.password}
-//                     onChange={handleInputs}
-//                     placeholder="Your Password"
-//                   />
-//                 </div>
-//                 <div className="form-group">
-//                   <label htmlFor="cpassword">
-//                     <i className="zmdi zmdi-lock material-icons-name"></i>
-//                   </label>
-//                   <input
-//                     type="password"
-//                     name="cpassword"
-//                     id="cpassword"
-//                     autoComplete="off"
-//                     value={user.cpassword}
-//                     onChange={handleInputs}
-//                     placeholder="Confirm Your Password"
-//                   />
-//                 </div>
-
-//                 <FormControl component="fieldset">
-//                   <FormLabel component="legend">Type</FormLabel>
-//                   <RadioGroup
-//                     aria-label="type"
-//                     name="type"
-//                     value={userType}
-//                     onChange={handleInputs}
-//                   >
-//                     <FormControlLabel
-//                       value="admin"
-//                       control={<Radio />}
-//                       label="Admin"
-//                     />
-//                     <FormControlLabel
-//                       value="user"
-//                       control={<Radio />}
-//                       label="User"
-//                     />
-//                   </RadioGroup>
-//                 </FormControl>
-
-//                 <div className="form-group form-button">
-//                   <input
-//                     type="submit"
-//                     name="signup"
-//                     id="signup"
-//                     className="form-submit"
-//                     value="register"
-//                     onClick={PostData}
-//                   />
-//                 </div>
-//               </form>
-//             </div>
-
-//             {/* <div className="signup-image">
-//               <figure>
-//                 <img src={signpic} alt="registration pic" />
-//               </figure>
-//               <NavLink to="/login" className="signup-image-link">
-//                 I am already register
-//               </NavLink>
-//             </div> */}
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   );
-// };
-
-// export default Signup;

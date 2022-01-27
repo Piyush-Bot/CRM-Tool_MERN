@@ -1,0 +1,3 @@
+restrict navigation through url path without login.
+set error page path and funtion
+

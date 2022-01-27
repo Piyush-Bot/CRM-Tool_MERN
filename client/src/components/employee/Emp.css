@@ -1,0 +1,106 @@
+/* -------------------------------------------------------------------------
+   begin send & cancel button
+ * ------------------------------------------------------------------------- */
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+/* -------------------------------------------------------------------------
+   end send & cancel button
+ * ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   begin LEAVE FROM page
+ * ------------------------------------------------------------------------- */
+
+.leaveForm_wrapper {
+  min-height: 100vh;
+  margin-top: 65px;
+  background: url(https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3760072.jpg&fm=jpg)
+    rgba(40, 40, 40, 0.6);
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+.section_leave {
+  padding: 16vh 0px 5vh;
+}
+.section_leave_titleBox {
+  display: flex;
+  margin: 0 0 40vh 5vw !important;
+  flex-direction: column !important;
+  justify-content: center;
+}
+.section_leave_title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+}
+
+.section_leave_title2 {
+  font-size: 50px;
+  font-family: "source sans pro";
+  line-height: 1.4;
+  color: #fff;
+}
+/* -------------------------------------------------------------------------
+  LEAVE FORM page Ends
+ * ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   LEAVE details page
+ * ------------------------------------------------------------------------- */
+
+.section-two {
+  background-color: #20232e;
+  padding: 100px 0 50px;
+  position: relative;
+  z-index: 10;
+}
+
+.section-two_leaveTable {
+  padding: 0px 50px;
+}
+
+.leave_table_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px 5px;
+  position: relative;
+  z-index: 1;
+  box-shadow: -6px 6px 0 #20232e, -12px 12px 0 #fff, -16px 16px 0 #20232e,
+    -22px 22px 0 #fff !important;
+}
+.emp_table_wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px 5px;
+  position: relative;
+  z-index: 1;
+  box-shadow: -6px 6px 0 #20232e, -12px 12px 0 #fff, -16px 16px 0 #20232e,
+    -22px 22px 0 #fff !important;
+}
+/* begin Media Max-Width 767
+===========================*/
+
+@media screen and (max-width: 767px) {
+  .section-one {
+    padding: 130px 0 190px;
+  }
+  .separator {
+    bottom: -110px;
+  }
+  .separator__svg {
+    left: -20%;
+    position: relative;
+    transform: rotate(15deg);
+    width: 140%;
+  }
+}
+
+/* -------------------------------------------------------------------------
+ LEAVE details page
+ * -------------------------------------------------------------------------*/

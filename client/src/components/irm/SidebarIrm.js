@@ -12,7 +12,7 @@ import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import { AddCircleOutlineOutlined, ImportantDevices } from "@material-ui/icons";
+import { AddCircleOutlineOutlined } from "@material-ui/icons";
 import MailIcon from "@material-ui/icons/Mail";
 import ManageAccountsSharpIcon from "@mui/icons-material/ManageAccountsSharp";
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: "100%",
     color: "white",
-    backgroundColor: "#2d2d2d",
+    backgroundColor: "#495159",
     position: "sticky",
     top: 0,
     padding: "73px 5px",
@@ -59,9 +59,6 @@ const SidebarIrm = () => {
   const history = useNavigate();
   const location = useLocation();
 
-  const navigateToItems = (path) => {
-    history(path);
-  };
   return (
     <>
       <Container className={classes.container}>
@@ -80,7 +77,7 @@ const SidebarIrm = () => {
               <ListItem
                 button
                 key={item.text}
-                onClick={() => navigateToItems(item.path)}
+                onClick={() => history(item.path)}
                 className={
                   location.pathname === item.path ? classes.active : null
                 }

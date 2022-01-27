@@ -10,14 +10,14 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import { useNavigate, useLocation } from "react-router-dom";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-
 import MailIcon from "@material-ui/icons/Mail";
 import { BsPersonLinesFill } from "react-icons/bs";
+
 const useStyles = makeStyles((theme) => ({
   container: {
-    height: "100vh",
+    height: "100%",
     color: "white",
-    backgroundColor: "#2d2d2d",
+    backgroundColor: "#495159",
     position: "sticky",
     top: 0,
     padding: "73px 5px",
@@ -43,8 +43,8 @@ const menuItems = [
   { text: "Employee", icon: <InboxIcon />, path: "/layouthr/employee" },
   { text: "EmployeeReg.", icon: <MailIcon />, path: "/layouthr/employeereg" },
   { text: "LeaveDetails", icon: <MailIcon />, path: "/layouthr/leaveapp" },
-  { text: "LeaveAppForm", icon: <MailIcon />, path: "/layouthr/leaveappform" },
-  { text: "HolidayList", icon: <MailIcon />, path: "" },
+  // { text: "LeaveAppForm", icon: <MailIcon />, path: "/layouthr/leaveappform" },
+  { text: "HolidayList", icon: <MailIcon />, path: "/layouthr/holiday" },
 ];
 
 const SidebarHr = () => {

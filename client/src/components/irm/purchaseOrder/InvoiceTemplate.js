@@ -9,7 +9,6 @@ const InvoiceTemplate = () => {
   useEffect(() => {
     const user = sessionStorage.getItem("feedData");
     const retrivedUser = JSON.parse(user);
-    console.log(retrivedUser);
     setUser(retrivedUser);
   }, []);
 
@@ -42,7 +41,11 @@ const InvoiceTemplate = () => {
           <div style={{ minwidth: "600px" }}>
             <header>
               {/* <div className="row"> */}
-              <a target="_blank" href="https://laudco.com/">
+              <a
+                target="_blank"
+                href="https://laudco.com/"
+                rel="noopener noreferrer"
+              >
                 <img
                   className="logom"
                   alt="logo"

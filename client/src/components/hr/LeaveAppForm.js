@@ -1,62 +1,127 @@
-import React from "react";
-import "./Hr.css";
+import React, { useState, useEffect } from "react";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
-  Stack,
   Button,
   TextField,
   FormControl,
   Paper,
   Box,
   Grid,
-  Typography,
   Select,
   InputLabel,
   MenuItem,
 } from "@mui/material";
 
 const LeaveAppForm = () => {
-  const [value, setValue] = React.useState(new Date("2021-08-18T21:11:54"));
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  let navigate = useNavigate();
+  // const [value, setValue] = useState(new Date());
+  const [approver, setApprover] = useState("");
+  const [leave, setLeave] = useState({
+    leaveType: "",
+    fDate: "",
+    tDate: "",
+    reason: "",
+    leaveStatus: "Pending",
+    name: "",
+  });
+
+  useEffect(() => {
+    getApprover();
+  }, []);
+
+  const getApprover = () => {
+    axios
+      .get(`/getApprover`)
+      .then(function (response) {
+        const approverId = response.data.data[0]["_id"] || "";
+        setApprover(approverId);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("/addleave", {
+        ...leave,
+        approver,
+      })
+      .then(function (response) {})
+      .catch(function (error) {
+        console.log(error);
+      });
+    navigate("/layouthr/leaveapp");
+  };
+
+  const handleInputs = (event) => {
+    const { name, value } = event.target;
+    setLeave((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleDateInputs = (newDate, name) => {
+    setLeave((prevState) => ({
+      ...prevState,
+      [name]: new Date(newDate).getTime(),
+    }));
   };
 
   return (
-    <div className="main_wrapper">
-      <Typography gutterBottom variant="h5">
-        Add LeaveApplicationEmp Details
-      </Typography>
-      <div className="empreghr">
-        <Grid item xs={12} component={Paper} elevation={6} square>
+    <div className="leaveForm_wrapper">
+      <Grid container className="section_leave">
+        <Grid items xs={5} className="section_leave_titleBox">
+          <div className="section_leave_title">
+            <hr className="divLine" />
+            REGISTRATION
+          </div>
+          <div className="section_leave_title2">Add New Employee</div>
+        </Grid>
+        <Grid items xs={7} component={Paper} elevation={6} className="empreghr">
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              my: 2,
+              mx: 2,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               padding: "20px 5px",
             }}
           >
-            <Box method="POST">
+            <Box>
               <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="Name"
+                    name="name"
+                    value={leave.name}
+                    onChange={handleInputs}
+                    variant="outlined"
+                  />
+                </Grid>
                 <Grid item xs={12}>
                   <FormControl fullWidth>
                     <InputLabel>Leave Type</InputLabel>
                     <Select
                       label="Select your option"
-                      name="leave_type"
-                      // value={age}
-                      // onChange={handleChange}
+                      name="leaveType"
+                      value={leave.leaveType}
+                      onChange={handleInputs}
                     >
-                      <MenuItem>Sick Leave</MenuItem>
-                      <MenuItem>Casual Leave</MenuItem>
-                      <MenuItem>Privilege Leave</MenuItem>
+                      <MenuItem value={"Sick Leave"}>Sick Leave</MenuItem>
+                      <MenuItem value={"Casual Leave"}>Casual Leave</MenuItem>
+                      <MenuItem value={"Privilege"}>Privilege Leave</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -64,11 +129,11 @@ const LeaveAppForm = () => {
                 <Grid item xs={12}>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                      label="FromDate"
-                      name="fdate"
+                      label="From-Date"
+                      name="fDate"
                       inputFormat="MM/dd/yyyy"
-                      // value={value}
-                      // onChange={handleChange}
+                      value={leave.fDate}
+                      onChange={(newDate) => handleDateInputs(newDate, "fDate")}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </LocalizationProvider>
@@ -77,60 +142,47 @@ const LeaveAppForm = () => {
                 <Grid item xs={12}>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                      label="ToDate"
+                      label="To-Date"
                       name="tdate"
                       inputFormat="MM/dd/yyyy"
-                      // value={value}
-                      // onChange={handleChange}
+                      value={leave.tDate}
+                      onChange={(newDate) => handleDateInputs(newDate, "tDate")}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </LocalizationProvider>
                 </Grid>
 
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
                     label="Reason for leave"
                     name="reason"
-                    // value={user.term}
-                    // onChange={(event) => handleChangeInput(event)}
+                    value={leave.reason}
+                    onChange={handleInputs}
                     multiline
                     rows={2}
                     variant="outlined"
                   />
                 </Grid>
 
-                <Grid item xs={12}>
-                  <FormControl fullWidth>
-                    <InputLabel>Leave Status</InputLabel>
-                    <Select
-                      required
-                      name="lstatus"
-                      label="Leave Status"
-                      // value={age}
-                      // onChange={handleChange}
-                    >
-                      <MenuItem>Pending</MenuItem>
-                      <MenuItem>Approved</MenuItem>
-                      <MenuItem>Rejected.</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Stack direction="row" spacing={2}>
-                  <Button variant="contained" endIcon={<SendIcon />}>
+                <Grid item xs={12} className="actionButtons">
+                  <Button
+                    variant="contained"
+                    endIcon={<SendIcon />}
+                    onClick={handleSubmit}
+                  >
                     Send
                   </Button>
                   <Button variant="outlined" startIcon={<DeleteIcon />}>
                     Cancel
                   </Button>
-                </Stack>
+                </Grid>
               </Grid>
             </Box>
           </Box>
         </Grid>
-      </div>
+      </Grid>
     </div>
   );
 };

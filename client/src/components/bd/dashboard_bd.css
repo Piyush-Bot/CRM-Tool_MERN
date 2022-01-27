@@ -1,40 +1,122 @@
-.dashboardbd_wrapper {
-  background-color: rgb(249, 249, 249);
-  margin-top: 65px;
+/* it includes IRM tool page css also */
+.handle {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
 }
 
-.filter-container {
-  padding: 2rem 0 1rem 0;
+.bd_wrapper {
+  margin: 64px 0px 0px;
 }
 
-/* .filter-subscription > p {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-} */
-
-/* .filter-subscription-heading {
-  color: black;
-  margin-bottom: 24px;
-  font-size: 24px;
-} */
-
-/* .filter-subscription-text {
-  margin-bottom: 24px;
-  font-size: 20px;
-} */
-
-.filter-input-areas {
+.bd_section1 {
   display: flex;
-  flex-direction: row;
+  max-height: 80vh;
+  padding-bottom: 5vh;
+  position: relative;
+}
+.bd_section1_textBox {
+  display: flex;
+  margin: 0 0 10vh 5vw !important;
+  flex-direction: column !important;
+  justify-content: center;
+}
+.bd_section1_heading {
+  font-size: 56px;
+  font-family: "source sans pro";
+  line-height: 1;
+  padding-inline-end: 9vw;
+}
+.bd_section1_heading span {
+  color: #a22c29;
+  font-weight: 700 !important;
+  padding-inline-start: 9vw;
+  font-family: "source sans pro";
+}
+.bd_section1_subHeading {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
+.bd_section1_para {
+  margin-top: 20vh;
+  padding-right: 22vh;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.bd_section1_imageBox {
+  background-color: #eeebea;
+  padding: 3vh 0;
+  display: flex;
+  align-items: center;
+}
+.bd_section1_imageCol1 {
+  bottom: 30vh;
+  position: relative !important;
+  width: 100% !important;
+  left: 0 !important;
+}
+.bd_section1_imageCol1 img {
+  position: absolute !important;
+  right: -2vw;
+  max-width: 300px;
+  transform: rotate(346deg);
+  /* border: solid 2px #2f8ac6; */
+}
+.bd_section1_imageCol2 h2 {
+  padding: 5vh 0 4vh;
+  text-align: center;
+  font-size: 24px;
+  color: #2f8ac6;
+}
+
+.bd_section2 {
+  background-color: #20232e;
+  display: flex;
+}
+
+.bd_section2_info {
+  margin-top: -26vh !important;
+  text-align: center;
+}
+
+.css-55vwbm-MuiTimeline-root {
+  padding-right: 15px !important;
+  padding-left: 0px !important;
+}
+
+.info_heading {
+  font-size: 30px;
+  font-family: "Roboto";
+  color: #162563;
+  line-height: 1;
+  padding-bottom: 3vh;
+}
+.info_text {
+  font-size: 24px;
+  color: white;
+}
+.info_subText {
+  font-size: 18px;
+  color: #ffde00;
+}
+.bd_section2_toolBox {
+  padding: 2vh 1vw 5vh 1vw;
+  position: relative;
+}
+.bd_section2_tool {
+  padding-bottom: 2vh;
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-.filter-input {
-  border-radius: 2px;
-  padding: 7px;
-  font-size: 18px;
-  background-color: #f7f7f7;
-  box-shadow: 0px 1px 3px 0px rgb(58, 24, 7);
+
+.css-1869usk-MuiFormControl-root {
+  background-color: white;
+  border-radius: 5px;
+  max-height: 46px;
+  min-width: 140px !important;
 }
 
 .search-input {
@@ -46,6 +128,7 @@
 }
 
 .input-icons i {
+  color: #2f8ac6;
   position: absolute;
 }
 
@@ -64,34 +147,36 @@
   text-align: center;
 }
 
-#selectItems {
-  width: 50px;
-}
-
-.main-table-container {
-  background-image: url("https://images.unsplash.com/photo-1502888395188-799b90b43871?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80");
-  background-color: #cccccc;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  padding: 5rem 8rem 3rem 8rem;
+.bd_section2_tableBox {
+  display: flex;
   width: 100%;
   min-height: 70vh;
-  margin-bottom: 140px;
 }
 
-.table-container {
-  display: flex;
-  flex-direction: column;
-  -webkit-box-shadow: 0px 0px 15px -10px rgb(58, 24, 7);
-  box-shadow: 0px 0px 10px 0px rgb(58, 24, 7);
-}
-
-.paperroot {
-  width: "100%";
-}
-.papercontainer {
+.tablecontainer {
   max-height: 65vh;
 }
+
+.custom-shape-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+.custom-shape-divider svg {
+  position: relative;
+  display: block;
+  width: calc(119% + 1.3px);
+  height: 80px;
+}
+.custom-shape-divider .shape-fill {
+  fill: #20232e;
+}
+
+/* background: url(https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3760072.jpg&fm=jpg)
+    rgba(40, 40, 40, 0.6);
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-attachment: fixed; */

@@ -2,33 +2,78 @@ import React, { Component } from "react";
 import "./dashboard_bd.css";
 import XLSX from "xlsx";
 import axios from "axios";
+import Info from "../bd/Info";
+import { DataGrid } from "@mui/x-data-grid";
 import {
-  MenuItem,
-  ListItemText,
+  Card,
+  CardContent,
+  Grid,
   Select,
-  Checkbox,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Button,
-} from "@material-ui/core";
+  FormControl,
+  MenuItem,
+  InputLabel,
+  Box,
+  ImageList,
+  ImageListItem,
+} from "@mui/material";
+import { ListItemText, Checkbox, Paper, Button } from "@material-ui/core";
+import { styled } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
 
-const headers = ["platform", "category", "genre", "gender", "location"];
+const Search1 = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: "10px",
+  backgroundColor: "white",
+  "&:hover": {
+    backgroundColor: "lightblue",
+  },
+  width: "50%",
+}));
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  color: "blue",
+  padding: "0 1vw",
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "#000",
+  padding: "1vh",
+  // vertical padding + font size from searchIcon
+  paddingLeft: `calc(1vw + 2vw)`,
+  width: "100%",
+}));
 
-const columns = [
-  { id: "platform", label: "Platform", minWidth: 100, align: "center" },
-  { id: "category", label: "Category", minWidth: 100, align: "center" },
-  { id: "genre", label: "Genre", minWidth: 200 },
-  { id: "name", label: "Name", minWidth: 100 },
-  { id: "followers", label: "Followers", minWidth: 50 },
-  { id: "gender", label: "Gender", minWidth: 100 },
-  { id: "handle", label: "Handle", minWidth: 50, mmaxWidth: 50 },
-  { id: "location", label: "Location", minWidth: 100 },
+const headers = ["platform", "category", "gender", "state", "genre"];
+const itemData = [
+  {
+    img: "https://images.unsplash.com/photo-1525097487452-6278ff080c31",
+    title: "Books",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1588436706487-9d55d73a39e3",
+    title: "Blinds",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1574180045827-681f8a1a9622",
+    title: "Chairs",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1530731141654-5993c3016c77",
+    title: "Bed",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1481277542470-605612bd2d61",
+    title: "Doors",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7",
+    title: "Coffee",
+  },
 ];
 
 export default class Search extends Component {
@@ -38,66 +83,67 @@ export default class Search extends Component {
       selectedOption: [],
       filterOption: [],
       filteredData: [],
-      page: 0,
-      rowsPerPage: 10,
       data: [],
+      columns: this.columns,
+      openEdit: [],
+      openAdd: false,
     };
   }
 
-  componentDidMount() {
-    axios
-      .get("/influencerlist", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        this.setState({
-          data: response.data.data,
-          filteredData: response.data.data,
-        });
-      });
-  }
+  columns = [
+    { field: "id", headerName: "ID", width: 50 },
+    { field: "platform", headerName: "Platform", width: 90 },
+    { field: "category", headerName: "Category", width: 80 },
+    { field: "genre", headerName: "Genre", width: 120 },
+    { field: "name", headerName: "Name", width: 120 },
+    { field: "gender", headerName: "Gender", width: 90 },
+    { field: "followers", headerName: "Followers", width: 90 },
+    { field: "location", headerName: "Location", width: 90 },
+    { field: "state", headerName: "State", width: 100 },
+    { field: "handle", headerName: "Handle", width: 120 },
+  ];
 
+  componentDidMount() {
+    axios.get("/getInfluencerlist").then((response) => {
+      const modifiedData = response.data.data.map((elm, index) => {
+        return {
+          id: index + 1,
+          state: elm["state "],
+          ...elm,
+        };
+      });
+      this.setState({
+        data: modifiedData,
+        filteredData: modifiedData,
+      });
+    });
+  }
   // export button
   downloadExcel = () => {
     const newData = this.state.filteredData.map((row) => {
       delete row.tableData;
       return row;
     });
-
     const workSheet = XLSX.utils.json_to_sheet(newData);
     const workBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workBook, workSheet, "Influencer");
-    //Buffer
-    let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
-    //Binary string
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
     //Download
     XLSX.writeFile(workBook, "InfluencerData.xlsx");
   };
 
-  //pagination
-  handleChangePage = (event, newPage) => {
-    this.setState({
-      page: newPage,
-    });
+  // To make clickable handle URL links
+  handleClick = (params) => {
+    if (params.field === "handle") {
+      window.open(params.value, "_blank");
+    }
   };
-
-  handleChangeRowsPerPage = (event) => {
-    this.setState({
-      page: 0,
-      rowsPerPage: +event.target.value,
-    });
-  };
-
   //filters
   optionSelected(e) {
     this.setState({
       filterOption: e.target.value,
     });
   }
-
   getdisplayvalue(data) {
     if (!data.includes("")) {
       const modifiyedVal = data.map((el) => Object.entries(el)[0][1]);
@@ -107,7 +153,6 @@ export default class Search extends Component {
       return "";
     }
   }
-
   filterOptionSelected(val) {
     const obj = {};
     val.forEach((el) => {
@@ -123,7 +168,6 @@ export default class Search extends Component {
       };
     });
   }
-
   handleSelectedValue = (value) => {
     if (!value.includes("")) {
       const duplicates = value
@@ -151,22 +195,31 @@ export default class Search extends Component {
 
   filterList(e) {
     let updateList = this.state.data;
-    updateList = updateList.filter((item) => {
+
+    const clonedFilteredData = JSON.parse(JSON.stringify(updateList));
+    const filteredList = clonedFilteredData.filter((item) => {
       return (
-        item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1 ||
-        item.location.toLowerCase().search(e.target.value.toLowerCase()) !==
-          -1 ||
-        item.genre.toLowerCase().search(e.target.value.toLowerCase()) !== -1 ||
-        item.platform.toLowerCase().search(e.target.value.toLowerCase()) !==
-          -1 ||
-        item.followers.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+        item.name
+          ?.toLowerCase()
+          .includes(e.currentTarget.value?.toLowerCase()) ||
+        item.location
+          ?.toLowerCase()
+          .includes(e.currentTarget.value?.toLowerCase()) ||
+        item.genre
+          ?.toLowerCase()
+          .includes(e.currentTarget.value?.toLowerCase()) ||
+        item.platform
+          ?.toLowerCase()
+          .includes(e.currentTarget.value?.toLowerCase()) ||
+        item.followers
+          ?.toLowerCase()
+          .includes(e.currentTarget.value?.toLowerCase())
       );
     });
-
     this.setState((prev) => {
       return {
         ...prev,
-        filteredData: updateList,
+        filteredData: filteredList,
         selectedOption: [],
       };
     });
@@ -182,12 +235,10 @@ export default class Search extends Component {
         this.state.data.forEach((elm, index) => {
           checkUnique.push(elm[el]);
         });
-
         let newArr = [...new Set(checkUnique)];
         let fileteredArr = newArr.filter((element) => {
           return element && element !== "";
         });
-
         fileteredArr.forEach((unique, indexU) => {
           const itemValue = {
             [el]: unique,
@@ -208,134 +259,132 @@ export default class Search extends Component {
     };
 
     //viewpart
-
     let { filterOption, filteredData } = this.state;
     return (
-      <>
-        <div className="dashboardbd_wrapper">
-          <div className="filter-container">
-            <section className="filter-subscription">
-              {/* filters through select */}
-              <div className="filter-input-areas">
-                <div className="filter-input">
-                  <span id="basic-addon1">Filter By:-</span>
-                  <Select
-                    placeholder="Username"
-                    aria-label="Username"
-                    // aria-describedby="basic-addon1"
-                    defaultValue=""
-                    multiple
-                    value={this.state.selectedOption}
-                    renderValue={(selected) => this.getdisplayvalue(selected)}
-                    onChange={(e) => this.handleSelectedValue(e.target.value)}
-                  >
-                    <MenuItem id="selectItems" value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {makeItems()}
-                  </Select>
-                </div>
-
-                {/* search here */}
-                <div className="search-input">
-                  <div className="input-icons">
-                    <input
-                      type="text"
-                      className="input-field"
-                      placeholder="Search Name"
-                      onChange={(e) => this.filterList(e)}
-                    />
-                    <i className="fa fa-search icon"></i>
-                  </div>
-                </div>
-                {/* download button */}
-                <div className="download">
-                  <Button
-                    onClick={this.downloadExcel}
-                    variant="contained"
-                    size="large"
-                  >
-                    Download
-                  </Button>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          {/* table shown */}
-
-          <div className=" main-table-container ">
-            <div className="table-container">
-              <Paper className="paperroot">
-                <TableContainer className="papercontainer">
-                  <Table
-                    title="Influencer Table1"
-                    stickyHeader
-                    aria-label="sticky table"
-                  >
-                    <TableHead>
-                      <TableRow title="Heading Row">
-                        {columns.map((column) => (
-                          <TableCell
-                            key={column.id}
-                            align={column.align}
-                            style={{ minWidth: column.minWidth }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.filteredData
-                        .slice(
-                          this.state.page * this.state.rowsPerPage,
-                          this.state.page * this.state.rowsPerPage +
-                            this.state.rowsPerPage
-                        )
-                        .map((row) => {
-                          return (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.Name}
-                              title="Body Row"
-                            >
-                              {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                  <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                  >
-                                    {column.format && typeof value === "number"
-                                      ? column.format(value)
-                                      : value}
-                                  </TableCell>
-                                );
-                              })}
-                            </TableRow>
-                          );
-                        })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                <TablePagination
-                  rowsPerPageOptions={[10, 25, 100]}
-                  component="div"
-                  count={this.state.data.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  onPageChange={(e, n) => this.handleChangePage(e, n)}
-                  onRowsPerPageChange={(e) => this.handleChangeRowsPerPage(e)}
-                />
-              </Paper>
-              {filteredData.length === 0 ? <p>no result found</p> : null}
+      <div className="bd_wrapper">
+        <Grid contanier className="bd_section1">
+          <Grid item xs={7} className="bd_section1_textBox">
+            <div className="bd_section1_subHeading">
+              <hr className="divLine" />
+              PEOPLE
             </div>
+            <div className="bd_section1_heading">
+              Looking for <span>Influencer...!</span>
+            </div>
+            <div className="bd_section1_para">
+              The internet is becoming the town square for the global village of
+              tomorrow.
+            </div>
+          </Grid>
+          <Grid item xs={5} className="bd_section1_imageBox">
+            <Grid item xs={3} className="bd_section1_imageCol1">
+              <img
+                alt="img"
+                src="https://images.pexels.com/photos/10153211/pexels-photo-10153211.jpeg?cs=srgb&dl=pexels-caroline-veronez-10153211.jpg&fm=jpg"
+              />
+            </Grid>
+            <Grid item xs={9} className="bd_section1_imageCol2">
+              <h2> Some Famous People. </h2>
+              <Box
+                sx={{ height: 450, overflowY: "scroll", position: "relative" }}
+              >
+                <ImageList variant="masonry" cols={2} gap={12}>
+                  {itemData.map((item) => (
+                    <ImageListItem key={item.img}>
+                      <img
+                        src={`${item.img}?w=248&fit=crop&auto=format`}
+                        srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                        alt={item.title}
+                        loading="lazy"
+                      />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
+              </Box>
+            </Grid>
+          </Grid>
+          <div className="custom-shape-divider">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z"
+                className="shape-fill"
+              ></path>
+            </svg>
           </div>
-        </div>
-      </>
+        </Grid>
+        <Grid contanier className="bd_section2">
+          <Grid item xs={3} className="bd_section2_info">
+            <Info />
+          </Grid>
+
+          <Grid item xs={9} className="bd_section2_toolBox">
+            <Grid className="bd_section2_tool">
+              <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-standard-label">
+                  Filter By-
+                </InputLabel>
+                <Select
+                  defaultValue=""
+                  multiple
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  value={this.state.selectedOption}
+                  renderValue={(selected) => this.getdisplayvalue(selected)}
+                  onChange={(e) => this.handleSelectedValue(e.target.value)}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {makeItems()}
+                </Select>
+              </FormControl>
+              <Search1>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  onChange={(e) => this.filterList(e)}
+                />
+              </Search1>
+              <Button
+                onClick={this.downloadExcel}
+                variant="contained"
+                size="large"
+              >
+                Download
+              </Button>
+            </Grid>
+
+            <Grid component={Paper} elevation={6}>
+              <Card component={Paper} elevation={6}>
+                <CardContent>
+                  <div style={{ height: 520, width: "100%" }}>
+                    <DataGrid
+                      rows={this.state.filteredData}
+                      columns={this.state.columns}
+                      pageSize={10}
+                      rowsPerPageOptions={[10]}
+                      onCellClick={(params) => this.handleClick(params)}
+                      getCellClassName={(params: GridCellParams<number>) => {
+                        if (params.field === "handle") {
+                          return "handle";
+                        }
+                        return "";
+                      }}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Grid>
+      </div>
     );
   }
 }

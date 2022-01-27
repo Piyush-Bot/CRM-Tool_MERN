@@ -1,5 +1,4 @@
 import {
-  Container,
   Card,
   CardContent,
   Typography,
@@ -58,25 +57,10 @@ const InvoiceGenerator = () => {
       gstAmt: gstamount,
       finalAmt: prevState.totalAmt + gstamount,
     }));
-    console.log("finallll", user.totalAmt + gstamount);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {
-      pono,
-      date,
-      name,
-      email,
-      phone,
-      address,
-      gstn,
-      pan,
-      term,
-      item,
-      gst,
-    } = user;
-    console.log("finalllllllllll----", user);
     sessionStorage["feedData"] = JSON.stringify(user); //sending data to nxt page
     navigate("/layoutirm/invoicetemp");
   };
@@ -150,15 +134,7 @@ const InvoiceGenerator = () => {
         <div className="curve"></div>
       </section>
       <Grid className="invoiceGen_wrapper">
-        <Typography gutterBottom variant="h5">
-          Purchase Order
-        </Typography>
-        <Card
-          className="PO_from_wrapper"
-          component={Paper}
-          elevation={6}
-          // style={{ maxWidth: 800, margin: "0 auto", padding: "20px 5px" }}
-        >
+        <Card className="PO_from_wrapper" component={Paper} elevation={6}>
           <CardContent>
             <div className="po_heading">Purchase Order</div>
             <Typography gutterBottom variant="body2">
@@ -168,7 +144,7 @@ const InvoiceGenerator = () => {
 
             <form>
               <Grid container spacing={1}>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     label="Po No."
@@ -179,7 +155,7 @@ const InvoiceGenerator = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Po Date"
                     name="date"
@@ -189,7 +165,7 @@ const InvoiceGenerator = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <TextField
                     required
                     label="Name"
@@ -200,7 +176,7 @@ const InvoiceGenerator = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
@@ -213,7 +189,7 @@ const InvoiceGenerator = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
@@ -225,7 +201,7 @@ const InvoiceGenerator = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
@@ -237,7 +213,7 @@ const InvoiceGenerator = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     label="GSTN"
@@ -248,7 +224,7 @@ const InvoiceGenerator = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     label="PAN"
@@ -260,19 +236,20 @@ const InvoiceGenerator = () => {
                   />
                 </Grid>
 
-                <Grid xs={12}>
+                <Grid item xs={12}>
                   <Typography variant="h5" style={{ marginTop: "20px" }}>
                     Add Item
                   </Typography>
                 </Grid>
                 {user.item.map((inputField) => (
                   <Grid
+                    item
                     xs={12}
                     sm={12}
                     key={inputField.id}
                     className="additional"
                   >
-                    <Grid xs={12} sm={8} item>
+                    <Grid item xs={12} sm={8}>
                       <TextField
                         required
                         fullWidth
@@ -284,7 +261,7 @@ const InvoiceGenerator = () => {
                         }
                       />
                     </Grid>
-                    <Grid xs={12} sm={2} item>
+                    <Grid item xs={12} sm={2}>
                       <TextField
                         required
                         fullWidth
@@ -297,7 +274,7 @@ const InvoiceGenerator = () => {
                         }
                       />
                     </Grid>
-                    <Grid xs={12} sm={2} item>
+                    <Grid item xs={12} sm={2}>
                       <TextField
                         required
                         fullWidth
@@ -322,7 +299,7 @@ const InvoiceGenerator = () => {
                   </Grid>
                 ))}
 
-                <Grid xs={12} sm={2} item className="additional">
+                <Grid item xs={12} sm={2} className="additional">
                   <TextField
                     required
                     fullWidth
@@ -334,7 +311,7 @@ const InvoiceGenerator = () => {
                   />
                   %
                 </Grid>
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
@@ -347,13 +324,12 @@ const InvoiceGenerator = () => {
                     variant="outlined"
                   />
                 </Grid>
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <Button
                     className="buttoninvoice"
                     type="submit"
                     variant="contained"
                     color="primary"
-                    type="submit"
                     onClick={handleSubmit}
                   >
                     Send →

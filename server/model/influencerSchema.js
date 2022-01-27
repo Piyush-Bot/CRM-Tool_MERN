@@ -33,6 +33,10 @@ const influencerSchema = new mongoose.Schema({
     type: String,
     default: false,
   },
+  state: {
+    type: String,
+    required: false,
+  },
   followers: {
     type: String,
     required: false,
@@ -48,6 +52,5 @@ const influencerSchema = new mongoose.Schema({
 });
 
 //collection creation
-const Influencer = mongoose.model("influencerlist", influencerSchema);
-
+const Influencer = mongoose.model("Influencer", influencerSchema);
 module.exports = Influencer;

@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import "./report.css";
-
 import { IoMdChatboxes, IoIosHeart } from "react-icons/io";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMicrophone } from "react-icons/fa";
 import { HiSpeakerphone } from "react-icons/hi";
-// import ForumTwoToneIcon from "@mui/icons-material/ForumTwoTone";
 import ReactApexChart from "react-apexcharts";
 import { Card, Grid, TextField, Button, Paper } from "@material-ui/core";
 
 const Report = () => {
   //////// --Tranding Info--/////////
-  const INITIAL_TRANDING = {
+  const [tranding, setTranding] = useState({
     posts: 0,
     users: 0,
     engagements: 0,
     reach: 0,
     impressions: 0,
-  };
-  const [tranding, setTranding] = useState(INITIAL_TRANDING);
-
+  });
+  const [submitedTranding, setSubmitedTranding] = useState({
+    posts: 0,
+    users: 0,
+    engagements: 0,
+    reach: 0,
+    impressions: 0,
+  });
   //-----***-----//
 
   //////// --Pie Chart Sentiment
@@ -95,11 +98,11 @@ const Report = () => {
       [name]: value,
     }));
   };
-
   const handleSubmitTranding = (e) => {
     e.preventDefault();
-    const { posts, users, engagements, reach, impressions } = tranding;
-    // setUser([+posts, +users, +engagements, +reach, +impressions]);
+    setSubmitedTranding({
+      ...tranding,
+    });
   };
   const handleSubmitSentiment = (e) => {
     e.preventDefault();
@@ -116,7 +119,6 @@ const Report = () => {
   return (
     <div className="report_wrapper">
       {/* ------Display------ */}
-
       <div className="report_title">Twitter Trend Report</div>
       <div className="display_wrapper">
         <Grid className="tranding_info_wrapper">
@@ -124,7 +126,7 @@ const Report = () => {
             <div className="reportMoneyContainer">
               <span className="reportMoney">
                 <IoMdChatboxes className="reportIcon " />
-                {tranding.posts}
+                {submitedTranding.posts}
               </span>
             </div>
             <span className="reportTitle">Posts</span>
@@ -132,36 +134,33 @@ const Report = () => {
           <div className="reportItem ">
             <div className="reportMoneyContainer">
               <BsPersonFill className="reportIcon " />
-              <span className="reportMoney">{tranding.users}</span>
+              <span className="reportMoney">{submitedTranding.users}</span>
             </div>
             <span className="reportTitle">Users</span>
           </div>
-
           <div className="reportItem">
             <div className="reportMoneyContainer">
               <span className="reportMoney">
                 <IoIosHeart className="reportIcon" />
-                {tranding.engagements}
+                {submitedTranding.engagements}
               </span>
             </div>
             <span className="reportTitle">Engagements</span>
           </div>
-
           <div className="reportItem">
             <div className="reportMoneyContainer">
               <span className="reportMoney">
                 <HiSpeakerphone className="reportIcon" />
-                {tranding.reach}
+                {submitedTranding.reach}
               </span>
             </div>
             <span className="reportTitle">Reach</span>
           </div>
-
           <div className="reportItem">
             <div className="reportMoneyContainer">
               <span className="reportMoney">
                 <FaMicrophone className="reportIcon" />
-                {tranding.impressions}
+                {submitedTranding.impressions}
               </span>
             </div>
             <span className="reportTitle">Impressions</span>
@@ -169,7 +168,7 @@ const Report = () => {
         </Grid>
 
         <Grid container className="pie_info_wrapper">
-          <Grid item xs={6} md={6} className="pie_chart">
+          <Grid item xs={6} sm={6} className="pie_chart">
             <div className="pie_title">Sentiment Score</div>
             <Card component={Paper} elevation={4}>
               <ReactApexChart
@@ -180,8 +179,7 @@ const Report = () => {
               />
             </Card>
           </Grid>
-
-          <Grid item xs={6} md={6} className="pie_chart">
+          <Grid item xs={6} sm={6} className="pie_chart">
             <div className="pie_title">Social Media Post</div>
             <Card component={Paper} elevation={4}>
               <ReactApexChart
@@ -198,12 +196,12 @@ const Report = () => {
 
       {/* ------input------ */}
       <Grid container className="input_wrapper">
-        <Grid item xs={6}>
+        <Grid item xs={6} sm={6}>
           <Card className="tranding_card">
             <div className="form_title">Summary Report</div>
             <form>
               <Grid container spacing={1}>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={16}>
                   <TextField
                     required
                     type="number"
@@ -211,10 +209,10 @@ const Report = () => {
                     name="posts"
                     fullWidth
                     value={tranding.posts}
-                    onChange={(event) => handleChangeInput(event)}
+                    onChange={handleChangeInput}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     type="number"
@@ -222,10 +220,10 @@ const Report = () => {
                     name="users"
                     fullWidth
                     value={tranding.users}
-                    onChange={(event) => handleChangeInput(event)}
+                    onChange={handleChangeInput}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     type="number"
@@ -233,10 +231,10 @@ const Report = () => {
                     name="engagements"
                     fullWidth
                     value={tranding.engagements}
-                    onChange={(event) => handleChangeInput(event)}
+                    onChange={handleChangeInput}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     type="number"
@@ -244,10 +242,10 @@ const Report = () => {
                     name="reach"
                     fullWidth
                     value={tranding.reach}
-                    onChange={(event) => handleChangeInput(event)}
+                    onChange={handleChangeInput}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     type="number"
@@ -255,10 +253,10 @@ const Report = () => {
                     name="impressions"
                     fullWidth
                     value={tranding.impressions}
-                    onChange={(event) => handleChangeInput(event)}
+                    onChange={handleChangeInput}
                   />
                 </Grid>
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <Button
                     variant="contained"
                     color="primary"
@@ -280,7 +278,7 @@ const Report = () => {
             <div className="form_title">Sentiment Score</div>
             <form>
               <Grid container spacing={1}>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     type="number"
@@ -291,7 +289,7 @@ const Report = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={6} item>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     type="number"
@@ -302,7 +300,7 @@ const Report = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <Button
                     variant="contained"
                     color="primary"
@@ -324,7 +322,7 @@ const Report = () => {
             <div className="form_title">Social Media</div>
             <form>
               <Grid container spacing={1}>
-                <Grid xs={12} sm={4} item>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     required
                     type="number"
@@ -335,7 +333,7 @@ const Report = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={4} item>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     required
                     type="number"
@@ -346,7 +344,7 @@ const Report = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} sm={4} item>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     required
                     type="number"
@@ -357,7 +355,7 @@ const Report = () => {
                     onChange={(event) => handleChangeInput(event)}
                   />
                 </Grid>
-                <Grid xs={12} item>
+                <Grid item xs={12}>
                   <Button
                     variant="contained"
                     color="primary"
