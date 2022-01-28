@@ -1,0 +1,94 @@
+.report_wrapper {
+  margin-top: 55px;
+  background-image: url("https://images.pexels.com/photos/5838826/pexels-photo-5838826.jpeg?cs=srgb&dl=pexels-photos-inspo-5838826.jpg&fm=jpg");
+  background-size: cover;
+
+  background-attachment: fixed;
+}
+.report_wrapper .report_title {
+  font-size: 70px;
+  font-family: "Source sans pro";
+  /* background-color: whitesmoke; */
+  text-align: center;
+  padding-top: 20px;
+  border-bottom: solid 1px yellowgreen;
+  color: rgb(255, 255, 255);
+}
+
+.display_wrapper {
+  background-color: #fff;
+  margin: 0px;
+  padding-top: 50px;
+}
+.tranding_info_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 100px 50px;
+  border-radius: 0px 50px 0px 50px;
+  background-color: #ffd428;
+}
+
+.reportItem {
+  /* flex: 2; */
+  /* margin: 10px; */
+  padding: 20px;
+}
+
+.reportTitle {
+  font-size: 18px;
+  margin-left: 30px;
+}
+
+.reportMoneyContainer {
+  display: flex;
+  align-items: center;
+}
+
+.reportMoney {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
+  display: flex;
+  align-items: center;
+}
+
+.reportIcon {
+  font-size: 30px;
+  margin-right: 5px;
+  color: rgb(0, 0, 0);
+}
+
+.pie_info_wrapper {
+  max-width: 90%;
+  margin: 0 auto;
+}
+.pie_info_wrapper .pie_chart {
+  padding: 20px 50px 50px;
+}
+.pie_info_wrapper .pie_title {
+  font-size: 30px;
+  font-family: "Roboto";
+  color: rgb(0, 0, 0);
+}
+.input_wrapper {
+  /* background-color: whitesmoke; */
+  padding: 50px 0 80px;
+  border-top: solid 1px yellowgreen;
+}
+
+.input_wrapper .tranding_card {
+  max-width: 500px;
+  margin: 0px auto;
+  padding: 20px 15px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgb(231, 23, 23);
+  box-shadow: 50px 50px 0px 0px #495159 !important;
+}
+.input_wrapper .form_title {
+  font-size: 30px;
+  font-family: "Roboto";
+
+  color: #162563;
+  padding-bottom: 10px;
+}

@@ -1,0 +1,32 @@
+.dashboard_wrapper {
+  background-color: rgb(249, 249, 249);
+  margin: 65px 0px 0px;
+  padding: 10px 10px;
+}
+.irmdb_section_one {
+  padding: 20px 50px;
+}
+.irmdb_section_two {
+  padding: 20px 10px 10px;
+}
+.Campaign-chart {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.48);
+}
+
+.Campaign-heading {
+  margin-bottom: 5%;
+  margin-left: 10%;
+}
+.coloumBar {
+  padding: 0px 25px;
+}
+
+.MuiListItemIcon-root {
+  color: rgb(255, 255, 255) !important;
+
+  min-width: 30px !important;
+}

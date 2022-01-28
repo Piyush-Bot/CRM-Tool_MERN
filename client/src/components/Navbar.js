@@ -1,123 +1,55 @@
-import React, { useContext } from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import { NavLink } from "react-router-dom";
-import logo from "../images/logo.png";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import "./css/Navbar.css";
 import { UserContext } from "../App";
 
 const Navbar = () => {
-  const { state, dispatch } = useContext(UserContext);
-  console.log(`the navbar user ${state} and ${dispatch}`);
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
 
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
+
+  useEffect(() => {
+    showButton();
+  }, []);
+
+  window.addEventListener("resize", showButton);
+
+  //here mern navbar fun.
+  const { state, dispatch } = useContext(UserContext);
   const RenderList = () => {
     if (state) {
       return (
         <>
-          <li className="nav-item active">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/"
-            >
-              Home{" "}
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/contact"
-            >
-              Contact
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/about"
-            >
-              AboutMe
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/dashboard"
-            >
-              Dashboard
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/logout"
-            >
-              logout
-            </NavLink>
+          <li>
+            <Link to="/logout" className="nav-links" onClick={closeMobileMenu}>
+              Logout
+            </Link>
           </li>
         </>
       );
     } else {
       return (
         <>
-          <li className="nav-item active">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/"
-            >
-              Home{" "}
-            </NavLink>
-          </li>
           <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/contact"
-            >
-              Contact
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/list"
-            >
-              Influencers
-            </NavLink>
+            <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+              Home
+            </Link>
           </li>
 
           <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/login"
-            >
+            <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
               Login
-            </NavLink>
-          </li>
-
-          <li className="nav-item">
-            <NavLink
-              exact
-              activeClassName="active-page"
-              className="nav-link"
-              to="/signup"
-            >
-              Register
-            </NavLink>
+            </Link>
           </li>
         </>
       );
@@ -126,24 +58,15 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <NavLink className="navbar-brand" to="#">
-          <img src={logo} alt="logo" />
-        </NavLink>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
+      <nav className="navbar">
+        <div className="navbar-container">
+          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+            ScrollLabs
+          </Link>
+          <div className="menu-icon" onClick={handleClick}>
+            <i className={click ? "fas fa-times" : "fas fa-bars"} />
+          </div>
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
             <RenderList />
           </ul>
         </div>

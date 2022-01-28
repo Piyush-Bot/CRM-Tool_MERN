@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js --ignore client"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +17,11 @@
     "express": "^4.17.1",
     "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.7",
-    "nodemon": "^2.0.12"
+    "mongoose": "^5.13.14",
+    "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.13",
+    "xlsx": "^0.17.2",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {},
   "description": ""

@@ -1,0 +1,319 @@
+.hr_wrapper {
+  margin-top: 65px;
+  padding: 10px 50px;
+  width: 100%;
+}
+.empreghr {
+  margin: 0px auto;
+  max-width: 550px !important;
+}
+
+/* -------------------------------------------------------------------------
+   begin send & cancel button
+ * ------------------------------------------------------------------------- */
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+/* -------------------------------------------------------------------------
+   end send & cancel button
+ * ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   begin Employee Reg. page
+ * ------------------------------------------------------------------------- */
+
+.empReg_wrapper {
+  min-height: 100vh;
+  margin-top: 65px;
+  background: url(https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3760072.jpg&fm=jpg)
+    rgba(40, 40, 40, 0.6);
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-attachment: fixed;
+}
+.section_reg {
+  padding: 16vh 0px 5vh;
+}
+.section_reg_titleBox {
+  display: flex;
+  margin: 0 0 40vh 5vw !important;
+  flex-direction: column !important;
+  justify-content: center;
+}
+.section_reg_title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+}
+.section_reg_title2 {
+  font-size: 50px;
+  font-family: "source sans pro";
+  line-height: 1.4;
+  color: #fff;
+}
+/* -------------------------------------------------------------------------
+  Employee Reg. page Ends
+ * ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   begin LEAVE FROM page
+ * ------------------------------------------------------------------------- */
+
+.leaveForm_wrapper {
+  min-height: 100vh;
+  margin-top: 65px;
+  background: url(https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3760072.jpg&fm=jpg)
+    rgba(40, 40, 40, 0.6);
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+.section_leave {
+  padding: 16vh 0px 5vh;
+}
+.section_leave_titleBox {
+  display: flex;
+  margin: 0 0 40vh 5vw !important;
+  flex-direction: column !important;
+  justify-content: center;
+}
+.section_leave_title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+}
+
+.section_leave_title2 {
+  font-size: 50px;
+  font-family: "source sans pro";
+  line-height: 1.4;
+  color: #fff;
+}
+/* -------------------------------------------------------------------------
+  LEAVE FORM page Ends
+ * ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   begin EMP and LEAVE details page
+ * ------------------------------------------------------------------------- */
+.leave_wrapper {
+  margin-top: 65px;
+  overflow-x: hidden;
+}
+.section-one {
+  display: flex;
+  position: relative;
+  max-height: 80vh;
+}
+
+.section-one__titleBox {
+  display: flex;
+  margin: 0 0 20vh 5vw !important;
+  flex-direction: column !important;
+  justify-content: center;
+}
+
+.section-one__title1 {
+  font-size: 24px;
+  line-height: 1;
+}
+.section-one__title2 {
+  font-size: 56px;
+  font-family: "source sans pro";
+  line-height: 1;
+}
+.divLine {
+  height: 0px !important;
+  width: 10%;
+  text-align: left;
+  margin-left: 0;
+  margin-right: 2vh;
+  border-top: 4px solid #fede00 !important;
+  opacity: 1 !important;
+}
+
+.section-one__para {
+  margin-top: 10vh;
+  padding-right: 22vh;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.section-one__banner {
+  position: relative;
+}
+.section-one__banner img {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-hero img {
+  object-fit: cover;
+}
+
+.section-two {
+  background-color: #20232e;
+  padding: 100px 0 50px;
+  position: relative;
+  z-index: 10;
+}
+
+/* ---begin Separator---*/
+.separator {
+  bottom: -4px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+/* ---end Separator---*/
+
+.leaveTable {
+  margin-top: -250px;
+  padding: 0px 50px;
+}
+
+.leave_table_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px 5px;
+  position: relative;
+  z-index: 1;
+  box-shadow: -6px 6px 0 #20232e, -12px 12px 0 #fff, -16px 16px 0 #20232e,
+    -22px 22px 0 #fff !important;
+}
+.emp_table_wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px 5px;
+  position: relative;
+  z-index: 1;
+  box-shadow: -6px 6px 0 #20232e, -12px 12px 0 #fff, -16px 16px 0 #20232e,
+    -22px 22px 0 #fff !important;
+}
+/* begin Media Max-Width 767
+===========================*/
+
+@media screen and (max-width: 767px) {
+  .section-one {
+    padding: 130px 0 190px;
+  }
+  .separator {
+    bottom: -110px;
+  }
+  .separator__svg {
+    left: -20%;
+    position: relative;
+    transform: rotate(15deg);
+    width: 140%;
+  }
+}
+
+/* .section-one__descr {
+  color: #ffd428;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+} */
+/* -------------------------------------------------------------------------
+   end EMP and LEAVE details page
+ * -------------------------------------------------------------------------*/
+
+/*---holiday page-----*/
+.holiday_section1 {
+  margin-top: 65px;
+  position: relative;
+  min-height: 50vh;
+  background-image: url(https://images.pexels.com/photos/1661905/pexels-photo-1661905.jpeg?cs=srgb&dl=pexels-amy-t-1661905.jpg&fm=jpg);
+  background-size: cover;
+  display: flex !important;
+  /* flex-direction: column !important; */
+  justify-content: center;
+  align-items: center;
+}
+
+.holiday_titleBox {
+  padding-bottom: 15vh;
+}
+.holiday_title {
+  font-size: 70px;
+  font-weight: 500;
+  text-align: center;
+  /* color: #ffffff; */
+  font-family: "source sans pro";
+  position: relative;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 rgb(255, 255, 255),
+    1px 1px 0 rgb(255, 255, 255);
+}
+
+.holiday_title:before {
+  position: absolute;
+  bottom: 0;
+  width: 25vw;
+  height: 2px;
+  content: "";
+  background-color: #777;
+}
+
+.holiday_section2 {
+  display: flex;
+  background-color: #20232e;
+  padding-bottom: 5vh;
+}
+
+.holiday_headingBox {
+  display: flex;
+  margin: 0 0 20vh 5vw !important;
+  flex-direction: column !important;
+  justify-content: center;
+}
+.holiday_section2_title2 {
+  padding-top: 15px;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+}
+.holiday_section2_title1 {
+  padding-inline-end: 70px;
+  font-size: 46px;
+  font-family: "source sans pro";
+  line-height: 1;
+  color: #fede00;
+}
+
+.holiday_card {
+  max-width: fit-content;
+  margin: 0px auto;
+  padding: 0 5px;
+  box-shadow: 6px 6px 0 #20232e, 34px 24px 0 #fff !important;
+}
+.custom-shape-divider-bottom-1641900198 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1641900198 svg {
+  position: relative;
+  display: block;
+  width: calc(109% + 1.3px);
+  height: 187px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1641900198 .shape-fill {
+  fill: #20232e;
+}
+/*---holiday page end-----*/
