@@ -339,7 +339,6 @@ router.put("/updateLeaves/:leaveId", async (req, res) => {
   // approveId and empId will be used after HR login page implementation
   const { empId, approverId, status } = req.body;
   const leaveId = mongoose.Types.ObjectId(req.params.leaveId);
-  console.log("leaveid-----", leaveId);
   let leaves = await Leave.updateOne(
     { _id: leaveId },
     {

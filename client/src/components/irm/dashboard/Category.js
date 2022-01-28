@@ -20,7 +20,6 @@ const FeaturedInfo = () => {
           }
         });
         delete obj[null];
-        console.log("response1111", obj);
         setInfluencer(obj);
       })
       .catch((err) => {

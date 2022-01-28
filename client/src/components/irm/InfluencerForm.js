@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
@@ -84,10 +84,6 @@ const InfluencerForm = (props) => {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    console.log("influencer------", influencer);
-  }, []);
 
   return (
     <Box

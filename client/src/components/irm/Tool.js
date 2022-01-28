@@ -114,6 +114,7 @@ export default class Search extends Component {
       columns: this.columns,
       openEdit: [],
       openAdd: false,
+      pageSize: 10,
     };
   }
 
@@ -483,6 +484,10 @@ export default class Search extends Component {
                     <DataGrid
                       rows={this.state.filteredData}
                       columns={this.state.columns}
+                      pageSize={this.state.pageSize}
+                      onPageSizeChange={(newPageSize) =>
+                        this.setState({ pageSize: newPageSize })
+                      }
                       rowsPerPageOptions={[10, 25, 50, 100]}
                       components={{
                         Toolbar: GridToolbar,
