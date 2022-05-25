@@ -10,18 +10,18 @@ import { Card, Grid, TextField, Button, Paper } from "@material-ui/core";
 const Report = () => {
   //////// --Tranding Info--/////////
   const [tranding, setTranding] = useState({
-    posts: 0,
-    users: 0,
-    engagements: 0,
-    reach: 0,
-    impressions: 0,
+    posts: "",
+    users: "",
+    engagements: "",
+    reach: "",
+    impressions: "",
   });
   const [submitedTranding, setSubmitedTranding] = useState({
-    posts: 0,
-    users: 0,
-    engagements: 0,
-    reach: 0,
-    impressions: 0,
+    posts: "",
+    users: "",
+    engagements: "",
+    reach: "",
+    impressions: "",
   });
   //-----***-----//
 
@@ -138,7 +138,7 @@ const Report = () => {
             </div>
             <span className="reportTitle">Users</span>
           </div>
-          <div className="reportItem">
+          {/* <div className="reportItem">
             <div className="reportMoneyContainer">
               <span className="reportMoney">
                 <IoIosHeart className="reportIcon" />
@@ -146,7 +146,7 @@ const Report = () => {
               </span>
             </div>
             <span className="reportTitle">Engagements</span>
-          </div>
+          </div> */}
           <div className="reportItem">
             <div className="reportMoneyContainer">
               <span className="reportMoney">
@@ -204,7 +204,7 @@ const Report = () => {
                 <Grid item xs={12} sm={16}>
                   <TextField
                     required
-                    type="number"
+                    // type="number"
                     label="Posts"
                     name="posts"
                     fullWidth
@@ -215,7 +215,7 @@ const Report = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    type="number"
+                    // type="number"
                     label="Users"
                     name="users"
                     fullWidth
@@ -226,7 +226,7 @@ const Report = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    type="number"
+                    // type="number"
                     label="Engagements"
                     name="engagements"
                     fullWidth
@@ -237,7 +237,7 @@ const Report = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    type="number"
+                    // type="number"
                     label="Reach"
                     name="reach"
                     fullWidth
@@ -248,7 +248,7 @@ const Report = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    type="number"
+                    // type="number"
                     label="Impressions"
                     name="impressions"
                     fullWidth

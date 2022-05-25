@@ -5,7 +5,7 @@ import { format } from "date-fns";
 // import { Mail, Notifications } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import logo from "../images/logo.png";
+import logo from "../../images/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -92,7 +92,7 @@ const AppbarBD = () => {
           </div> */}
           <Typography className={classes.name}>{userName}</Typography>
           <span onClick={logout} className="app-links">
-            Logout
+            LOGOUT
           </span>
         </Toolbar>
       </AppBar>

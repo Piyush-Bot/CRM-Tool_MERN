@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import { format } from "date-fns";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import logo from "../images/logo.png";
+import logo from "../../images/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@material-ui/core";
 import "./Invoice.css";
-import logo from "../../images/LM.png";
+import logo from "../../../images/LM.png";
 
 const InvoiceTemplate = () => {
   const [user, setUser] = useState({});

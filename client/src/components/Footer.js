@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import logoImage from "./images/logo_full.png";
+import logoImage from "../images/logo_full.png";
 
 function Copyright() {
   return (
@@ -14,7 +14,6 @@ function Copyright() {
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }

@@ -1,19 +1,17 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { homeObjOne, homeObjThree } from "./HomeData";
 import HeroSection from "./HeroSection";
-import HomeContent from "./HomeContent";
+import HeroSection3 from "./HeroSection3";
+import Navbar from "./Navbar";
+import HeroSection2 from "./HeroSection2";
 
 const Home = () => {
   return (
     <>
-      <Grid container>
-        <Grid item xs={12}>
-          <HeroSection />
-        </Grid>
-        <Grid item xs={12}>
-          <HomeContent />
-        </Grid>
-      </Grid>
+      <Navbar />
+      <HeroSection {...homeObjOne} />
+      <HeroSection2 />
+      <HeroSection3 />
     </>
   );
 };

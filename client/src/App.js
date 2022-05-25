@@ -2,8 +2,6 @@ import React, { useReducer, createContext } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./components/css/App.css";
-import Navbar from "./components/Navbar";
-import Home from "./components/home/Home";
 import LayoutBd from "./components/bd/LayoutBd";
 import LayoutIrm from "./components/irm/LayoutIrm";
 import LayoutHr from "./components/hr/LayoutHr";
@@ -12,6 +10,7 @@ import ErrorPage from "./components/Errorpage";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { initialState, reducer } from "./components/reducer/UseReducer";
+import Home from "./components/home/Home";
 
 // we create a contextAPI
 export const UserContext = createContext();
@@ -25,10 +24,7 @@ const Routing = () => {
   // };
   return (
     <Routes>
-      <Route path="/" element={<Home />}>
-        <Navbar />
-        <Home />
-      </Route>
+      <Route path="/" element={<Home />} />
       <Route path="/login/*" element={<Login />} />
       <Route path="/signup/*" element={<Signup />} />
       {/* {routeSelector[sessionStorage.getItem("role")]} */}

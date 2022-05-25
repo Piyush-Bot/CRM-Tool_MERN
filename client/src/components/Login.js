@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import loginConstant from "./shared/Login.Constant";
@@ -16,7 +15,7 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
-import loginImage from "./images/logo.png";
+import loginImage from "../images/logo.png";
 const theme = createTheme();
 
 const Login = () => {
@@ -65,7 +64,7 @@ const Login = () => {
             backgroundPosition: "center",
           }}
         >
-          <img src={loginImage} alt="login logo" width={"100px"} />
+          <img src={loginImage} alt="login logo" width={"60px"} />
         </Grid>
 
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>

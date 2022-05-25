@@ -4,7 +4,7 @@ import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 // import { Mail, Notifications } from "@material-ui/icons";
-import logo from "../images/logo.png";
+import logo from "../../images/logo.png";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
